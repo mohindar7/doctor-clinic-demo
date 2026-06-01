@@ -8,6 +8,21 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedServiceId, setSelectedServiceId] = useState('general');
   const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  // Monitor scroll percentage for visual feedback
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        const progress = (window.scrollY / totalScroll) * 100;
+        setScrollProgress(progress);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Load configuration from localStorage draft or fall back to config.json
   const [config, setConfig] = useState(() => {
@@ -57,6 +72,9 @@ export default function App() {
       {/* Inject dynamic styles */}
       <style>{themeStyles}</style>
 
+      {/* Scroll Progress Indicator Bar */}
+      <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }}></div>
+
       {/* Navigation Header */}
       <header className="header">
         <div className="container nav">
@@ -75,9 +93,19 @@ export default function App() {
             <li><a href="#testimonials" className="nav-link">Reviews</a></li>
             <li><a href="#contact" className="nav-link">Contact</a></li>
           </ul>
-          <button className="btn btn-tonal" onClick={() => openBooking('general')}>
-            Book Appointment
-          </button>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <button className="btn btn-tonal" onClick={() => openBooking('general')}>
+              Book Appointment
+            </button>
+            <button 
+              className={`hamburger-btn ${isDrawerOpen ? 'open' : ''}`}
+              onClick={() => setIsDrawerOpen(!isDrawerOpen)}
+              aria-label="Toggle Mobile Navigation Menu"
+            >
+              <span className="hamburger-line"></span>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -353,6 +381,21 @@ export default function App() {
       >
         ⚙️
       </button>
+
+      {/* Mobile Navigation Drawer */}
+      <div className={`mobile-drawer-overlay ${isDrawerOpen ? 'open' : ''}`} onClick={() => setIsDrawerOpen(false)}></div>
+      <div className={`mobile-drawer ${isDrawerOpen ? 'open' : ''}`}>
+        <ul className="mobile-drawer-links">
+          <li><a href="#services" className="mobile-drawer-link" onClick={() => setIsDrawerOpen(false)}>Services</a></li>
+          <li><a href="#doctor" className="mobile-drawer-link" onClick={() => setIsDrawerOpen(false)}>About</a></li>
+          <li><a href="#gallery" className="mobile-drawer-link" onClick={() => setIsDrawerOpen(false)}>Gallery</a></li>
+          <li><a href="#testimonials" className="mobile-drawer-link" onClick={() => setIsDrawerOpen(false)}>Reviews</a></li>
+          <li><a href="#contact" className="mobile-drawer-link" onClick={() => setIsDrawerOpen(false)}>Contact</a></li>
+        </ul>
+        <button className="btn btn-filled" style={{ marginTop: 'auto', width: '100%' }} onClick={() => { setIsDrawerOpen(false); openBooking('general'); }}>
+          Book Appointment
+        </button>
+      </div>
     </>
   );
 }

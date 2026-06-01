@@ -952,7 +952,11 @@ h1, h2, h3, h4, h5, h6 {
   }
   
   .nav-links {
-    display: none; /* simple hamburger fallback or hidden for simplicity */
+    display: none;
+  }
+  
+  .nav .btn-tonal {
+    display: none;
   }
   
   .date-grid {
@@ -1127,5 +1131,161 @@ h1, h2, h3, h4, h5, h6 {
 .admin-list-item-buttons {
   display: flex;
   gap: 8px;
+}
+
+/* Scroll Progress indicator */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background-color: var(--md-sys-color-primary);
+  z-index: 101;
+  transition: width 100ms ease-out;
+}
+
+/* Hamburger menu button */
+.hamburger-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--md-shape-corner-medium);
+  cursor: pointer;
+  z-index: 200;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--md-motion-duration-short) var(--md-motion-easing-standard);
+  outline: none;
+}
+.hamburger-btn:hover {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
+.hamburger-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--md-sys-color-on-surface);
+  position: relative;
+  transition: transform var(--md-motion-duration-short) var(--md-motion-easing-spring),
+              background-color var(--md-motion-duration-short) var(--md-motion-easing-standard);
+}
+.hamburger-line::before, .hamburger-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background-color: var(--md-sys-color-on-surface);
+  transition: transform var(--md-motion-duration-short) var(--md-motion-easing-spring);
+}
+.hamburger-line::before {
+  top: -8px;
+}
+.hamburger-line::after {
+  bottom: -8px;
+}
+
+/* Morph Hamburger to Close X state */
+.hamburger-btn.open .hamburger-line {
+  background-color: transparent;
+}
+.hamburger-btn.open .hamburger-line::before {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger-btn.open .hamburger-line::after {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile Drawer Overlay and Sheet */
+.mobile-drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 150;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--md-motion-duration-medium) var(--md-motion-easing-standard);
+}
+.mobile-drawer-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  background-color: var(--md-sys-color-surface);
+  box-shadow: var(--md-elevation-3);
+  z-index: 160;
+  padding: 100px 32px 40px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  transform: translateX(100%);
+  transition: transform var(--md-motion-duration-medium) var(--md-motion-easing-spring);
+}
+.mobile-drawer.open {
+  transform: translateX(0);
+}
+
+.mobile-drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  list-style: none;
+}
+
+.mobile-drawer-link {
+  font-family: var(--md-font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--md-sys-color-on-surface);
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: var(--md-shape-corner-medium);
+  transition: all var(--md-motion-duration-short) var(--md-motion-easing-spring);
+  display: block;
+}
+.mobile-drawer-link:hover {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-primary);
+  transform: scale(1.03) translateX(8px);
+}
+.mobile-drawer-link:active {
+  transform: scale(0.96) translateX(4px);
+}
+
+/* Animations for modern entry */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-on-scroll {
+  animation: fadeInUp 0.8s var(--md-motion-easing-spring) forwards;
+}
+
+/* Responsive adjustment for hamburger visibility */
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: flex; /* Show hamburger menu trigger on mobile */
+  }
 }
 
