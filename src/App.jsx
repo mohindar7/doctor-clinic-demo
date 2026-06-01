@@ -178,14 +178,17 @@ export default function App() {
               </a>
             </div>
           </div>
-          <div className="hero-image-wrapper animate-on-scroll delay-200">
-            <img 
-              src="/clinic_lobby.png" 
-              alt={`${config.clinic.name} modern lobby`} 
-              className="hero-image"
-            />
+          <div className="animate-on-scroll delay-200">
+            <div className="hero-image-wrapper">
+              <img 
+                src="/clinic_lobby.png" 
+                alt={`${config.clinic.name} modern lobby`} 
+                className="hero-image"
+              />
+            </div>
           </div>
         </section>
+
 
 
         {/* Services Section */}
@@ -200,16 +203,17 @@ export default function App() {
             
             <div className="services-grid">
               {config.services.map((srv, idx) => (
-                <ServiceCard 
-                  key={srv.id}
-                  title={srv.title}
-                  description={srv.description}
-                  iconPath={srv.iconPath}
-                  onBook={() => openBooking(srv.id)}
-                  className={`animate-on-scroll delay-${(idx + 1) * 100}`}
-                />
+                <div key={srv.id} className={`animate-on-scroll delay-${(idx + 1) * 100}`}>
+                  <ServiceCard 
+                    title={srv.title}
+                    description={srv.description}
+                    iconPath={srv.iconPath}
+                    onBook={() => openBooking(srv.id)}
+                  />
+                </div>
               ))}
             </div>
+
           </div>
         </section>
 
@@ -217,16 +221,19 @@ export default function App() {
         {/* Doctor Profile Section */}
         <section id="doctor" className="container section">
           <div className="doctor-profile">
-            <div className="doctor-img-wrapper animate-on-scroll">
-              <img 
-                src="/doctor_portrait.png" 
-                alt={config.doctor.name} 
-                className="doctor-img"
-              />
+            <div className="animate-on-scroll">
+              <div className="doctor-img-wrapper">
+                <img 
+                  src="/doctor_portrait.png" 
+                  alt={config.doctor.name} 
+                  className="doctor-img"
+                />
+              </div>
             </div>
             <div className="doctor-info animate-on-scroll delay-200">
               <span className="hero-badge">{config.doctor.roleBadge}</span>
               <h2 className="display-medium">{config.doctor.name}</h2>
+
               <p className="body-large">{config.doctor.bioLarge}</p>
               <p className="body-medium">{config.doctor.bioMedium}</p>
               
@@ -264,42 +271,45 @@ export default function App() {
               { src: '/gallery_3.png', alt: 'Diagnostic Center' },
               { src: '/gallery_4.png', alt: 'General Ward & Nurse Desk' }
             ].map((img, idx) => (
-              <div 
-                key={idx} 
-                className={`service-card animate-on-scroll delay-${(idx + 1) * 100}`} 
-                style={{ 
-                  padding: 0, 
-                  overflow: 'hidden', 
-                  height: '280px',
-                  borderRadius: 'var(--md-shape-corner-large)'
-                }}
-              >
-                <img 
-                  src={img.src} 
-                  alt={img.alt} 
+              <div key={idx} className={`animate-on-scroll delay-${(idx + 1) * 100}`}>
+                <div 
+                  className="service-card" 
                   style={{ 
-                    width: '100%', 
-                    height: '100%', 
-                    objectFit: 'cover',
-                    transition: 'transform var(--md-motion-duration-medium) var(--md-motion-easing-spring)'
-                  }} 
-                  onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.08)'}
-                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                />
-                <div style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  background: 'linear-gradient(transparent, rgba(15, 23, 42, 0.85))',
-                  padding: '20px',
-                  color: 'white'
-                }}>
-                  <h4 style={{ color: 'white', fontFamily: 'var(--md-font-display)', fontSize: '1.05rem', fontWeight: '700' }}>{img.alt}</h4>
+                    padding: 0, 
+                    overflow: 'hidden', 
+                    height: '280px',
+                    borderRadius: 'var(--md-shape-corner-large)',
+                    position: 'relative'
+                  }}
+                >
+                  <img 
+                    src={img.src} 
+                    alt={img.alt} 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover',
+                      transition: 'transform var(--md-motion-duration-medium) var(--md-motion-easing-spring)'
+                    }} 
+                    onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.08)'}
+                    onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    background: 'linear-gradient(transparent, rgba(15, 23, 42, 0.85))',
+                    padding: '20px',
+                    color: 'white'
+                  }}>
+                    <h4 style={{ color: 'white', fontFamily: 'var(--md-font-display)', fontSize: '1.05rem', fontWeight: '700' }}>{img.alt}</h4>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
+
         </section>
 
 
@@ -315,21 +325,24 @@ export default function App() {
 
             <div className="testimonials-grid">
               {config.testimonials.map((test, index) => (
-                <div key={index} className={`testimonial-card animate-on-scroll delay-${(index + 1) * 100}`}>
-                  <div className="testimonial-rating">
-                    {"★".repeat(test.rating) + "☆".repeat(5 - test.rating)}
-                  </div>
-                  <p className="body-medium">{test.text}</p>
-                  <div className="testimonial-author">
-                    <div className="author-avatar">{test.avatar}</div>
-                    <div className="author-info">
-                      <h4>{test.author}</h4>
-                      <p>{test.meta}</p>
+                <div key={index} className={`animate-on-scroll delay-${(index + 1) * 100}`}>
+                  <div className="testimonial-card">
+                    <div className="testimonial-rating">
+                      {"★".repeat(test.rating) + "☆".repeat(5 - test.rating)}
+                    </div>
+                    <p className="body-medium">{test.text}</p>
+                    <div className="testimonial-author">
+                      <div className="author-avatar">{test.avatar}</div>
+                      <div className="author-info">
+                        <h4>{test.author}</h4>
+                        <p>{test.meta}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
+
 
           </div>
         </section>
