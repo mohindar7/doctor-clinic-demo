@@ -1,7 +1,6 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import ThemeToggle from '../common/ThemeToggle';
-import Button from '../common/Button';
 
 /**
  * Main application navigation header.
@@ -119,10 +118,6 @@ export default function Header() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <ThemeToggle />
-          
-          <Button variant="tonal" onClick={() => openBooking('general')}>
-            Book Appointment
-          </Button>
 
           <button
             className={`hamburger-btn ${isDrawerOpen ? 'open' : ''}`}
