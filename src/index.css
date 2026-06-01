@@ -60,16 +60,6 @@
 }
 
 .dark-theme {
-  --md-sys-color-primary: hsl(172, 85%, 45%);
-  --md-sys-color-on-primary: hsl(172, 90%, 5%);
-  --md-sys-color-primary-container: hsl(172, 85%, 15%);
-  --md-sys-color-on-primary-container: hsl(172, 85%, 85%);
-  
-  --md-sys-color-secondary: hsl(205, 80%, 55%);
-  --md-sys-color-on-secondary: hsl(205, 90%, 5%);
-  --md-sys-color-secondary-container: hsl(205, 80%, 15%);
-  --md-sys-color-on-secondary-container: hsl(205, 80%, 85%);
-
   --md-sys-color-tertiary: hsl(36, 75%, 60%);
   --md-sys-color-on-tertiary: hsl(36, 90%, 5%);
   --md-sys-color-tertiary-container: hsl(36, 75%, 15%);
@@ -87,16 +77,31 @@
 }
 
 
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
 body {
   font-family: var(--md-font-body);
   background-color: var(--md-sys-color-surface);
   color: var(--md-sys-color-on-surface);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
   transition: background-color var(--md-motion-duration-medium) var(--md-motion-easing-standard),
               color var(--md-motion-duration-medium) var(--md-motion-easing-standard);
 }
+
 
 
 h1, h2, h3, h4, h5, h6 {
@@ -342,8 +347,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-badge {
   align-self: flex-start;
-  background-color: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-primary);
   padding: 6px 16px;
   border-radius: var(--md-shape-corner-full);
   font-size: 0.85rem;
@@ -351,6 +356,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
+
 
 .hero-actions {
   display: flex;
@@ -1134,7 +1140,7 @@ h1, h2, h3, h4, h5, h6 {
   right: 0;
   bottom: 0;
   width: 300px;
-  background-color: var(--md-sys-color-surface);
+  background-color: var(--md-sys-color-surface-container-high);
   box-shadow: var(--md-elevation-3);
   z-index: 160;
   padding: 100px 32px 40px 32px;
@@ -1142,8 +1148,11 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   gap: 32px;
   transform: translateX(100%);
-  transition: transform var(--md-motion-duration-medium) var(--md-motion-easing-spring);
+  transition: transform var(--md-motion-duration-medium) var(--md-motion-easing-spring),
+              background-color var(--md-motion-duration-medium) var(--md-motion-easing-standard);
+  border-left: 1px solid var(--md-sys-color-surface-variant);
 }
+
 .mobile-drawer.open {
   transform: translateX(0);
 }
