@@ -30,9 +30,13 @@ export function getClinicStatus() {
   const isOpen = currentTimeInMinutes >= openTime && currentTimeInMinutes < closeTime;
 
   if (isOpen) {
+    const statusLabel = "Open Now";
+    const timeLabel = `Closes at ${closeLabel}`;
     return {
       isOpen: true,
-      text: `Open Now • Closes at ${closeLabel}`,
+      statusLabel,
+      timeLabel,
+      text: `${statusLabel} • ${timeLabel}`,
       color: '#10B981' // Vibrant Emerald Green for Open
     };
   } else {
@@ -49,9 +53,13 @@ export function getClinicStatus() {
       dayLabel = "today";
     }
 
+    const statusLabel = "Closed";
+    const timeLabel = `Opens at 9:00 AM ${dayLabel}`;
     return {
       isOpen: false,
-      text: `Closed • Opens at 9:00 AM ${dayLabel}`,
+      statusLabel,
+      timeLabel,
+      text: `${statusLabel} • ${timeLabel}`,
       color: '#EF4444' // Bright Red/Rose for Closed
     };
   }

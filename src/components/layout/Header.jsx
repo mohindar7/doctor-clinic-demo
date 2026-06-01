@@ -42,29 +42,34 @@ export default function Header() {
                 className="status-badge"
                 style={{
                   display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  padding: '6px 12px',
-                  borderRadius: 'var(--md-shape-corner-full)',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  gap: '2px',
+                  padding: '4px 10px',
+                  borderRadius: '12px',
                   backgroundColor: 'var(--md-sys-color-surface-container-high)',
-                  fontSize: '0.78rem',
-                  fontWeight: '700',
-                  color: 'var(--md-sys-color-on-surface-variant)',
                   boxShadow: 'var(--md-elevation-1)',
                   whiteSpace: 'nowrap',
                   marginLeft: '4px'
                 }}
               >
-                <span
-                  className="status-badge-dot"
-                  style={{
-                    width: '6px',
-                    height: '6px',
-                    color: status.color,
-                    backgroundColor: status.color
-                  }}
-                />
-                <span>{status.text}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', lineHeight: 1.1 }}>
+                  <span
+                    className="status-badge-dot"
+                    style={{
+                      width: '6px',
+                      height: '6px',
+                      color: status.color,
+                      backgroundColor: status.color
+                    }}
+                  />
+                  <span style={{ fontSize: '0.72rem', fontWeight: '800', color: 'var(--md-sys-color-on-surface-variant)' }}>
+                    {status.statusLabel}
+                  </span>
+                </div>
+                <span style={{ fontSize: '0.62rem', fontWeight: '500', color: 'var(--md-sys-color-on-surface-variant)', opacity: 0.8, paddingLeft: '12px', lineHeight: 1.1 }}>
+                  {status.timeLabel}
+                </span>
               </div>
             </>
           ) : (
