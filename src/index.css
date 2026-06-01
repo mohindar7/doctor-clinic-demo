@@ -1184,21 +1184,25 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(0.96) translateX(4px);
 }
 
-/* Animations for modern entry */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Animations for modern entry on viewport intersection */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 1000ms var(--md-motion-easing-spring),
+              transform 1000ms var(--md-motion-easing-spring);
+  will-change: opacity, transform;
 }
 
-.animate-on-scroll {
-  animation: fadeInUp 0.8s var(--md-motion-easing-spring) forwards;
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
+
+/* Staggered Delay Utilities */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
 
 /* Responsive adjustment for hamburger visibility */
 @media (max-width: 768px) {

@@ -36,6 +36,28 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Trigger entrance animations when scrolling elements into view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    animatedElements.forEach((el) => observer.observe(el));
+
+    return () => {
+      animatedElements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
+
+
   // Load configuration from localStorage draft or fall back to config.json
   const [config, setConfig] = useState(defaultConfig);
 
@@ -143,7 +165,7 @@ export default function App() {
       <main>
         {/* Hero Section */}
         <section className="container hero">
-          <div className="hero-content">
+          <div className="hero-content animate-on-scroll">
             <span className="hero-badge">{config.clinic.badge}</span>
             <h1 className="display-large">{config.clinic.heroTitle}</h1>
             <p className="body-large">{config.clinic.heroSubtitle}</p>
@@ -156,7 +178,7 @@ export default function App() {
               </a>
             </div>
           </div>
-          <div className="hero-image-wrapper">
+          <div className="hero-image-wrapper animate-on-scroll delay-200">
             <img 
               src="/clinic_lobby.png" 
               alt={`${config.clinic.name} modern lobby`} 
@@ -165,10 +187,11 @@ export default function App() {
           </div>
         </section>
 
+
         {/* Services Section */}
         <section id="services" className="section-alt">
           <div className="container">
-            <div className="section-header">
+            <div className="section-header animate-on-scroll">
               <h2 className="display-medium">Our Medical Specialties</h2>
               <p className="body-large">
                 Providing top-tier primary and specialized healthcare solutions utilizing advanced diagnostics and treatment methodologies.
@@ -176,30 +199,32 @@ export default function App() {
             </div>
             
             <div className="services-grid">
-              {config.services.map((srv) => (
+              {config.services.map((srv, idx) => (
                 <ServiceCard 
                   key={srv.id}
                   title={srv.title}
                   description={srv.description}
                   iconPath={srv.iconPath}
                   onBook={() => openBooking(srv.id)}
+                  className={`animate-on-scroll delay-${(idx + 1) * 100}`}
                 />
               ))}
             </div>
           </div>
         </section>
 
+
         {/* Doctor Profile Section */}
         <section id="doctor" className="container section">
           <div className="doctor-profile">
-            <div className="doctor-img-wrapper">
+            <div className="doctor-img-wrapper animate-on-scroll">
               <img 
                 src="/doctor_portrait.png" 
                 alt={config.doctor.name} 
                 className="doctor-img"
               />
             </div>
-            <div className="doctor-info">
+            <div className="doctor-info animate-on-scroll delay-200">
               <span className="hero-badge">{config.doctor.roleBadge}</span>
               <h2 className="display-medium">{config.doctor.name}</h2>
               <p className="body-large">{config.doctor.bioLarge}</p>
@@ -215,11 +240,12 @@ export default function App() {
               </div>
             </div>
           </div>
+
         </section>
 
         {/* Clinic Gallery Section */}
         <section id="gallery" className="container section">
-          <div className="section-header">
+          <div className="section-header animate-on-scroll">
             <h2 className="display-medium">Our Facilities & Clinic</h2>
             <p className="body-large">
               A glimpse inside Shraddha Clinic & Nursing Home, showing our clean chambers, diagnostic systems, and ward rooms.
@@ -240,7 +266,7 @@ export default function App() {
             ].map((img, idx) => (
               <div 
                 key={idx} 
-                className="service-card" 
+                className={`service-card animate-on-scroll delay-${(idx + 1) * 100}`} 
                 style={{ 
                   padding: 0, 
                   overflow: 'hidden', 
@@ -276,10 +302,11 @@ export default function App() {
           </div>
         </section>
 
+
         {/* Testimonials/Reviews Section */}
         <section id="testimonials" className="section-alt">
           <div className="container">
-            <div className="section-header">
+            <div className="section-header animate-on-scroll">
               <h2 className="display-medium">What Our Patients Say</h2>
               <p className="body-large">
                 Real feedback from individuals and families who trust {config.clinic.name} for their daily and specialized healthcare.
@@ -288,7 +315,7 @@ export default function App() {
 
             <div className="testimonials-grid">
               {config.testimonials.map((test, index) => (
-                <div key={index} className="testimonial-card">
+                <div key={index} className={`testimonial-card animate-on-scroll delay-${(index + 1) * 100}`}>
                   <div className="testimonial-rating">
                     {"★".repeat(test.rating) + "☆".repeat(5 - test.rating)}
                   </div>
@@ -303,18 +330,19 @@ export default function App() {
                 </div>
               ))}
             </div>
+
           </div>
         </section>
 
         {/* Contact details & Map */}
         <section id="contact" className="container section">
-          <div className="section-header">
+          <div className="section-header animate-on-scroll">
             <h2 className="display-medium">{config.contact.badge}</h2>
             <p className="body-large">{config.contact.description}</p>
           </div>
 
           <div className="contact-layout">
-            <div className="contact-details">
+            <div className="contact-details animate-on-scroll">
               <div className="contact-item">
                 <div className="contact-item-icon">📍</div>
                 <div className="contact-item-content">
@@ -345,7 +373,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="contact-map-wrapper" style={{ height: '380px', overflow: 'hidden' }}>
+            <div className="contact-map-wrapper animate-on-scroll delay-200" style={{ height: '380px', overflow: 'hidden' }}>
               <iframe
                 title="Google Maps Location"
                 width="100%"
@@ -357,6 +385,7 @@ export default function App() {
               ></iframe>
             </div>
           </div>
+
         </section>
       </main>
 
