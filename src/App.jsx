@@ -425,7 +425,7 @@ export default function App() {
           <div className="footer-divider"></div>
           <div className="footer-bottom">
             <p>&copy; {new Date().getFullYear()} {config.clinic.name} Clinic. All rights reserved.</p>
-            <p>Designed for Healthcare Professionals</p>
+            <p>designed by Mohindar</p>
           </div>
         </div>
       </footer>
