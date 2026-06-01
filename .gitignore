@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Scratch and temp files
+scratch/
+public/logo_backup.png
+public/logo_icon.png
+details.txt
+

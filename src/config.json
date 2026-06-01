@@ -39,7 +39,15 @@
       "description": "Routine wellness checkups, primary care diagnoses, preventative medicine, and custom healthcare management.",
       "duration": "30 mins",
       "cost": "₹300",
-      "iconPath": "M22 12h-4l-3 9L9 3l-3 9H2"
+      "iconPath": "M22 12h-4l-3 9L9 3l-3 9H2",
+      "treatments": [
+        "Chronic Disease Screening",
+        "Common Flu & Infection Care",
+        "Preventative Health Counseling",
+        "Routine Physical Examination"
+      ],
+      "assignedDoctors": "Dr. Roshan Rana & Dr. Komal Rana",
+      "preparations": "Please bring any active prescriptions, past medical records, and a list of ongoing medications for review."
     },
     {
       "id": "pediatrics",
@@ -47,7 +55,15 @@
       "description": "Specialized health checks, developmental screening, vaccines, and treatment for kids and adolescents.",
       "duration": "30 mins",
       "cost": "₹400",
-      "iconPath": "M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2zm-3 8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm6 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-6 4a3 3 0 0 0 6 0H9z"
+      "iconPath": "M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2zm-3 8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm6 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-6 4a3 3 0 0 0 6 0H9z",
+      "treatments": [
+        "Growth & Milestone Monitoring",
+        "Immunization & Vaccination Schedules",
+        "Childhood Allergy Diagnostic",
+        "Acute Pediatric Illness Care"
+      ],
+      "assignedDoctors": "Dr. Komal Rana",
+      "preparations": "Please bring the child's government vaccination card or developmental tracking book."
     },
     {
       "id": "nursing",
@@ -55,7 +71,15 @@
       "description": "24/7 patient monitoring, post-operative care, wound management, and inpatient ward support.",
       "duration": "60 mins",
       "cost": "₹1200",
-      "iconPath": "M19 12H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V4a2 2 0 00-2-2H7a2 2 0 00-2 2v8"
+      "iconPath": "M19 12H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V4a2 2 0 00-2-2H7a2 2 0 00-2 2v8",
+      "treatments": [
+        "Inpatient General Ward Admission",
+        "Post-Operative Wound Care & Dressing",
+        "IV Fluids & Injection Administration",
+        "24/7 Vital Monitoring & Support"
+      ],
+      "assignedDoctors": "Clinic General Nursing Staff",
+      "preparations": "A valid doctor's prescription detailing specific therapies or inpatient requirements is mandatory."
     }
   ],
   "testimonials": [

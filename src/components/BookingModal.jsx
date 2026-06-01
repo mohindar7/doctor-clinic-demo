@@ -1,12 +1,6 @@
-import React, { useState } from 'react';
-
-const SERVICES = [
-  { id: 'general', name: 'General Consultation', duration: '30 mins', cost: '$50' },
-  { id: 'pediatrics', name: 'Pediatric Care', duration: '45 mins', cost: '$70' },
-  { id: 'cardio', name: 'Cardiology Assessment', duration: '60 mins', cost: '$120' },
-  { id: 'dental', name: 'Dental Cleaning & Exam', duration: '45 mins', cost: '$80' },
-  { id: 'wellness', name: 'Comprehensive Health Checkup', duration: '90 mins', cost: '$150' },
-];
+import React, { useState, useEffect } from 'react';
+import { useApp } from '../context/AppContext';
+import Button from './common/Button';
 
 const TIME_SLOTS = [
   '09:00 AM', '10:00 AM', '11:00 AM', '01:30 PM', '02:30 PM', '03:30 PM', '04:30 PM'
@@ -28,22 +22,40 @@ const getNextBusinessDays = () => {
   return days;
 };
 
-export default function BookingModal({ isOpen, onClose, initialServiceId }) {
+export default function BookingModal() {
+  const { isModalOpen, closeBooking, selectedServiceId, config } = useApp();
+
   const [step, setStep] = useState(1);
-  const [selectedService, setSelectedService] = useState(initialServiceId || 'general');
+  const [selectedService, setSelectedService] = useState('general');
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', note: '' });
 
   const dates = getNextBusinessDays();
+  const services = config.services || [];
 
-  // Reset modal state
+  // Reset/sync modal state when open changes
+  useEffect(() => {
+    if (isModalOpen) {
+      setStep(1);
+      setSelectedService(selectedServiceId || 'general');
+      setSelectedDate(null);
+      setSelectedTime(null);
+      setFormData({ name: '', email: '', phone: '', note: '' });
+    }
+  }, [isModalOpen, selectedServiceId]);
+
+  if (!isModalOpen) return null;
+
+  const currentService = services.find(s => s.id === selectedService) || services[0] || {
+    id: 'general',
+    title: 'General Consultation',
+    duration: '30 mins',
+    cost: '₹300'
+  };
+
   const handleClose = () => {
-    setStep(1);
-    setSelectedDate(null);
-    setSelectedTime(null);
-    setFormData({ name: '', email: '', phone: '', note: '' });
-    onClose();
+    closeBooking();
   };
 
   const handleServiceSelect = (id) => {
@@ -66,18 +78,15 @@ export default function BookingModal({ isOpen, onClose, initialServiceId }) {
     setStep(4); // Success step
   };
 
-  if (!isOpen) return null;
-
-  const currentService = SERVICES.find(s => s.id === selectedService) || SERVICES[0];
-
   return (
-    <div className={`modal-overlay ${isOpen ? 'open' : ''}`} onClick={handleClose}>
+    <div className={`modal-overlay ${isModalOpen ? 'open' : ''}`} onClick={handleClose}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2>Book an Appointment</h2>
           <button className="modal-close-btn" onClick={handleClose}>&times;</button>
         </div>
 
+        {/* Scrollable body for accessibility/smaller screens */}
         <div className="modal-body">
           {/* Step Progress Nodes */}
           {step < 4 && (
@@ -93,14 +102,14 @@ export default function BookingModal({ isOpen, onClose, initialServiceId }) {
             <div className="fade-in">
               <h3 style={{ marginBottom: '16px' }}>Select a Clinical Service</h3>
               <div className="options-list">
-                {SERVICES.map((srv) => (
+                {services.map((srv) => (
                   <div 
                     key={srv.id} 
                     className={`option-item ${selectedService === srv.id ? 'selected' : ''}`}
                     onClick={() => handleServiceSelect(srv.id)}
                   >
                     <div>
-                      <div className="option-title">{srv.name}</div>
+                      <div className="option-title">{srv.title}</div>
                       <div className="option-subtitle">{srv.duration} • {srv.cost}</div>
                     </div>
                     {selectedService === srv.id && (
@@ -119,7 +128,7 @@ export default function BookingModal({ isOpen, onClose, initialServiceId }) {
             <div className="fade-in">
               <h3 style={{ marginBottom: '16px' }}>Choose Date & Time</h3>
               <p className="body-medium" style={{ marginBottom: '16px' }}>
-                Selected: <strong>{currentService.name}</strong>
+                Selected: <strong>{currentService.title}</strong>
               </p>
               
               <h4 style={{ fontSize: '1rem', marginBottom: '8px' }}>Available Dates</h4>
@@ -168,7 +177,7 @@ export default function BookingModal({ isOpen, onClose, initialServiceId }) {
             <form onSubmit={handleSubmit} className="fade-in">
               <h3 style={{ marginBottom: '16px' }}>Patient Registration</h3>
               <p className="body-medium" style={{ marginBottom: '20px' }}>
-                Booking <strong>{currentService.name}</strong> on{' '}
+                Booking <strong>{currentService.title}</strong> on{' '}
                 <strong>
                   {selectedDate?.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                 </strong>{' '}
@@ -241,7 +250,7 @@ export default function BookingModal({ isOpen, onClose, initialServiceId }) {
                 marginTop: '16px',
                 textAlign: 'left'
               }}>
-                <div style={{ marginBottom: '8px' }}><strong>Service:</strong> {currentService.name}</div>
+                <div style={{ marginBottom: '8px' }}><strong>Service:</strong> {currentService.title}</div>
                 <div style={{ marginBottom: '8px' }}><strong>Date:</strong> {selectedDate?.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}</div>
                 <div style={{ marginBottom: '8px' }}><strong>Time:</strong> {selectedTime}</div>
                 <div><strong>Location:</strong> Suite 400, CarePulse Medical Plaza</div>
@@ -253,46 +262,47 @@ export default function BookingModal({ isOpen, onClose, initialServiceId }) {
           )}
         </div>
 
+        {/* Modal controls using standard M3 buttons */}
         <div className="modal-footer">
           {step === 1 && (
             <>
               <div /> {/* spacing placeholder */}
-              <button className="btn btn-filled" onClick={() => setStep(2)}>Next</button>
+              <Button variant="filled" onClick={() => setStep(2)}>Next</Button>
             </>
           )}
 
           {step === 2 && (
             <>
-              <button className="btn btn-tonal" onClick={handleBack}>Back</button>
-              <button 
-                className="btn btn-filled" 
+              <Button variant="tonal" onClick={handleBack}>Back</Button>
+              <Button 
+                variant="filled" 
                 onClick={handleNext}
                 disabled={!selectedDate || !selectedTime}
                 style={{ opacity: (!selectedDate || !selectedTime) ? 0.5 : 1 }}
               >
                 Next
-              </button>
+              </Button>
             </>
           )}
 
           {step === 3 && (
             <>
-              <button className="btn btn-tonal" onClick={handleBack}>Back</button>
-              <button 
-                className="btn btn-filled" 
+              <Button variant="tonal" onClick={handleBack}>Back</Button>
+              <Button 
+                variant="filled" 
                 onClick={handleSubmit}
                 disabled={!formData.name || !formData.email || !formData.phone}
                 style={{ opacity: (!formData.name || !formData.email || !formData.phone) ? 0.5 : 1 }}
               >
                 Confirm Appointment
-              </button>
+              </Button>
             </>
           )}
 
           {step === 4 && (
-            <button className="btn btn-filled" style={{ width: '100%' }} onClick={handleClose}>
+            <Button variant="filled" style={{ width: '100%' }} onClick={handleClose}>
               Done
-            </button>
+            </Button>
           )}
         </div>
       </div>

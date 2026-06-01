@@ -398,22 +398,39 @@ h1, h2, h3, h4, h5, h6 {
   gap: 30px;
 }
 
+
 .service-card {
+  position: relative;
+  z-index: 1;
   background: linear-gradient(135deg, var(--md-sys-color-surface-container-high) 0%, hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.02) 100%);
   padding: 40px;
   border-radius: 32px 12px 32px 12px; /* Asymmetric M3 Squircle */
   box-shadow: 0 10px 30px -10px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.08);
   border: none; /* No outlines in UI elements */
   transition: transform var(--md-motion-duration-medium) var(--md-motion-easing-spring),
-              border-radius var(--md-motion-duration-medium) var(--md-motion-easing-spring),
-              box-shadow var(--md-motion-duration-medium) var(--md-motion-easing-spring),
-              background var(--md-motion-duration-medium) var(--md-motion-easing-standard);
+              border-radius var(--md-motion-duration-medium) var(--md-motion-easing-standard),
+              box-shadow var(--md-motion-duration-medium) var(--md-motion-easing-spring);
   cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  position: relative;
   overflow: hidden; /* Keep content clipped and neat */
+}
+
+/* Pseudo-element for smooth gradient transition on hover */
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--card-hover-bg);
+  border-radius: inherit;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity var(--md-motion-duration-medium) var(--md-motion-easing-standard);
+}
+
+.service-card:hover::before {
+  opacity: 1;
 }
 
 .service-card:hover {
@@ -421,7 +438,6 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 12px 32px 12px 32px; /* Morphing asymmetric corners */
   box-shadow: 0 20px 40px -12px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.25),
               0 0 24px 2px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.18); /* Clean outer edge glow, no text bleed */
-  background: var(--card-hover-bg); /* Use bright non-dull theme background */
 }
 
 .service-card:active {
@@ -544,28 +560,53 @@ h1, h2, h3, h4, h5, h6 {
   gap: 30px;
 }
 
+
+
+
 .testimonial-card {
+  position: relative;
+  z-index: 1;
   background-color: var(--md-sys-color-surface-container-high);
   padding: 36px;
   border-radius: 28px 28px 8px 28px; /* Speech bubble asymmetric style */
-  box-shadow: var(--md-elevation-1);
+  box-shadow: 0 10px 30px -10px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.08);
   display: flex;
   flex-direction: column;
   gap: 20px;
-  position: relative;
   border: none; /* No outlines in UI elements */
   transition: transform var(--md-motion-duration-medium) var(--md-motion-easing-spring),
-              box-shadow var(--md-motion-duration-medium) var(--md-motion-easing-standard),
-              background-color var(--md-motion-duration-medium) var(--md-motion-easing-standard);
+              border-radius var(--md-motion-duration-medium) var(--md-motion-easing-standard),
+              box-shadow var(--md-motion-duration-medium) var(--md-motion-easing-spring);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Pseudo-element for smooth background gradient cross-fade */
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--card-hover-bg);
+  border-radius: inherit;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity var(--md-motion-duration-medium) var(--md-motion-easing-standard);
+}
+
+.testimonial-card:hover::before {
+  opacity: 1;
 }
 
 .testimonial-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--md-elevation-2);
-  background-color: var(--md-sys-color-surface-container-highest);
+  transform: translateY(-8px) scale(1.01);
+  border-radius: 28px 8px 28px 28px; /* Morphing speech bubble shape */
+  box-shadow: 0 20px 40px -10px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.35),
+              0 0 24px 4px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.25); /* Strong primary glow */
 }
 
-
+.testimonial-card:active {
+  transform: translateY(-2px) scale(0.98);
+}
 
 .testimonial-rating {
   color: hsl(45, 100%, 50%);
@@ -1254,11 +1295,11 @@ h1, h2, h3, h4, h5, h6 {
   right: 24px;
   height: 56px;
   padding: 0 24px;
-  border-radius: var(--md-shape-corner-full);
+  border-radius: 32px 12px 32px 12px; /* Start with asymmetric M3 Squircle shape */
   background-color: var(--md-sys-color-primary);
   color: var(--md-sys-color-on-primary);
   border: none;
-  box-shadow: var(--md-elevation-3);
+  box-shadow: 0 10px 30px -10px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.35);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1267,19 +1308,24 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1rem;
   cursor: pointer;
   z-index: 999;
-  transition: transform var(--md-motion-duration-short) var(--md-motion-easing-spring),
-              border-radius var(--md-motion-duration-short) var(--md-motion-easing-spring),
-              box-shadow var(--md-motion-duration-short) var(--md-motion-easing-standard);
+  filter: brightness(1);
+  transition: transform var(--md-motion-duration-medium) var(--md-motion-easing-spring),
+              border-radius var(--md-motion-duration-medium) var(--md-motion-easing-standard),
+              box-shadow var(--md-motion-duration-medium) var(--md-motion-easing-spring),
+              filter var(--md-motion-duration-medium) var(--md-motion-easing-standard);
   outline: none;
 }
 .booking-fab:hover {
-  transform: scale(1.08) translateY(-4px);
-  border-radius: var(--md-shape-corner-large);
-  box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px) scale(1.08); /* Bouncy lift */
+  border-radius: 12px 32px 12px 32px; /* Morphing asymmetric corners smoothly */
+  filter: brightness(1.22); /* Glowing brightening effect! */
+  box-shadow: 0 15px 35px -5px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.65),
+              0 0 30px 6px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.45); /* Intense primary neon glow! */
 }
 .booking-fab:active {
-  transform: scale(0.95) translateY(0);
+  transform: translateY(-2px) scale(0.95);
 }
+
 .booking-fab-icon {
   transition: transform var(--md-motion-duration-medium) var(--md-motion-easing-spring);
 }
@@ -1330,6 +1376,203 @@ h1, h2, h3, h4, h5, h6 {
 }
 .testimonial-card, .service-card, .footer {
   transition: all var(--md-motion-duration-medium) var(--md-motion-easing-standard);
+}
+
+/* Live Status Badge Animation */
+.status-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(0.85); opacity: 0.5; box-shadow: 0 0 0 0 currentColor; }
+  50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 8px 2px currentColor; }
+  100% { transform: scale(0.85); opacity: 0.5; box-shadow: 0 0 0 0 currentColor; }
+}
+
+/* Bottom Sheet Overlay & Drawer */
+.detail-sheet-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--md-motion-duration-medium) var(--md-motion-easing-standard);
+}
+.detail-sheet-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.detail-sheet-container {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  max-width: 600px;
+  background-color: var(--md-sys-color-surface);
+  border-radius: 32px 32px 0 0;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  transform: translate(-50%, 100%);
+  transition: transform var(--md-motion-duration-long) var(--md-motion-easing-spring);
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+  overflow: hidden;
+}
+.detail-sheet-container.open {
+  transform: translate(-50%, 0);
+}
+
+.detail-sheet-handle {
+  width: 48px;
+  height: 4px;
+  background-color: var(--md-sys-color-surface-container-highest);
+  border-radius: 2px;
+  margin: 12px auto 0 auto;
+  cursor: pointer;
+}
+
+.detail-sheet-header {
+  padding: 16px 32px 24px 32px;
+  border-bottom: 1px solid var(--md-sys-color-surface-container-low);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.detail-sheet-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--md-shape-corner-medium);
+  background: linear-gradient(135deg, var(--md-sys-color-primary) 0%, var(--md-sys-color-secondary) 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-sheet-body {
+  padding: 32px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.detail-sheet-meta-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: var(--md-sys-color-surface-container-low);
+  padding: 16px 20px;
+  border-radius: var(--md-shape-corner-medium);
+}
+
+.detail-sheet-instruction-card {
+  background-color: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.05);
+  border-left: 4px solid var(--md-sys-color-primary);
+  padding: 16px 20px;
+  border-radius: 0 var(--md-shape-corner-medium) var(--md-shape-corner-medium) 0;
+  margin-top: 24px;
+}
+
+.detail-sheet-footer {
+  padding: 24px 32px;
+  border-top: 1px solid var(--md-sys-color-surface-container-low);
+  display: flex;
+  gap: 16px;
+}
+
+/* FAQ Accordion Styling */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 800px;
+  margin: 40px auto 0 auto;
+}
+.faq-card {
+  position: relative;
+  z-index: 1;
+  background-color: var(--md-sys-color-surface-container-high);
+  padding: 24px 32px;
+  border-radius: 32px 12px 32px 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+  transition: transform var(--md-motion-duration-medium) var(--md-motion-easing-spring),
+              border-radius var(--md-motion-duration-medium) var(--md-motion-easing-standard),
+              box-shadow var(--md-motion-duration-medium) var(--md-motion-easing-spring);
+  overflow: hidden;
+}
+.faq-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--card-hover-bg);
+  border-radius: inherit;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity var(--md-motion-duration-medium) var(--md-motion-easing-standard);
+}
+.faq-card:hover::before, .faq-card.open::before {
+  opacity: 1;
+}
+.faq-card:hover, .faq-card.open {
+  border-radius: 12px 32px 12px 32px;
+  box-shadow: 0 15px 30px -10px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.2),
+              0 0 20px 2px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.12);
+}
+.faq-card:active {
+  transform: scale(0.98);
+}
+.faq-question-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.faq-question {
+  font-family: var(--md-font-display);
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: var(--md-sys-color-on-surface);
+}
+.faq-toggle-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--md-motion-duration-medium) var(--md-motion-easing-spring);
+  flex-shrink: 0;
+  font-weight: bold;
+}
+.faq-card.open .faq-toggle-icon {
+  transform: rotate(180deg);
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+}
+.faq-answer-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--md-motion-duration-medium) var(--md-motion-easing-standard);
+}
+.faq-answer-wrapper.open {
+  max-height: 300px;
+}
+.faq-answer {
+  padding-top: 16px;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  color: var(--md-sys-color-on-surface-variant);
 }
 
 
