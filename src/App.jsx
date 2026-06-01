@@ -99,9 +99,6 @@ export default function App() {
       {/* Scroll Progress Indicator Bar */}
       <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }}></div>
 
-      {/* Ambient Decorative Blur Blobs */}
-      <div className="ambient-blob-1"></div>
-      <div className="ambient-blob-2"></div>
 
 
       {/* Navigation Header */}
@@ -162,7 +159,10 @@ export default function App() {
         </div>
       </header>
 
-      <main>
+      <main style={{ position: 'relative', overflow: 'hidden', width: '100%' }}>
+        {/* Ambient Decorative Blur Blobs inside main to keep header sticky and prevent horizontal overflow */}
+        <div className="ambient-blob-1"></div>
+        <div className="ambient-blob-2"></div>
         {/* Hero Section */}
         <section className="container hero">
           <div className="hero-content animate-on-scroll">
