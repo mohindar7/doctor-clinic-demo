@@ -71,6 +71,7 @@ export default function App() {
           <ul className="nav-links">
             <li><a href="#services" className="nav-link">Services</a></li>
             <li><a href="#doctor" className="nav-link">About The Doctor</a></li>
+            <li><a href="#gallery" className="nav-link">Gallery</a></li>
             <li><a href="#testimonials" className="nav-link">Reviews</a></li>
             <li><a href="#contact" className="nav-link">Contact</a></li>
           </ul>
@@ -154,6 +155,65 @@ export default function App() {
                 ))}
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Clinic Gallery Section */}
+        <section id="gallery" className="container section">
+          <div className="section-header">
+            <h2 className="display-medium">Our Facilities & Clinic</h2>
+            <p className="body-large">
+              A glimpse inside Shraddha Clinic & Nursing Home, showing our clean chambers, diagnostic systems, and ward rooms.
+            </p>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gap: '24px',
+            marginTop: '40px'
+          }}>
+            {[
+              { src: '/gallery_1.png', alt: 'Clinic Reception' },
+              { src: '/gallery_2.png', alt: 'Patient Ward Cabin' },
+              { src: '/gallery_3.png', alt: 'Diagnostic Center' },
+              { src: '/gallery_4.png', alt: 'General Ward & Nurse Desk' }
+            ].map((img, idx) => (
+              <div 
+                key={idx} 
+                className="service-card" 
+                style={{ 
+                  padding: 0, 
+                  overflow: 'hidden', 
+                  height: '280px',
+                  borderRadius: 'var(--md-shape-corner-large)'
+                }}
+              >
+                <img 
+                  src={img.src} 
+                  alt={img.alt} 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover',
+                    transition: 'transform var(--md-motion-duration-medium) var(--md-motion-easing-spring)'
+                  }} 
+                  onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.08)'}
+                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                />
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  background: 'linear-gradient(transparent, rgba(15, 23, 42, 0.85))',
+                  padding: '20px',
+                  color: 'white'
+                }}>
+                  <h4 style={{ color: 'white', fontFamily: 'var(--md-font-display)', fontSize: '1.05rem', fontWeight: '700' }}>{img.alt}</h4>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -265,6 +325,7 @@ export default function App() {
             <ul className="footer-nav">
               <li><a href="#services">Services</a></li>
               <li><a href="#doctor">About</a></li>
+              <li><a href="#gallery">Gallery</a></li>
               <li><a href="#testimonials">Reviews</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
