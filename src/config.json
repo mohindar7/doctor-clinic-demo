@@ -4,7 +4,8 @@
     "fullName": "Shraddha Clinic & Nursing Home - Dr. Roshan & Dr. Komal Rana",
     "badge": "Welcome to Shraddha Clinic & Nursing Home",
     "heroTitle": "Your Family's Health is Our Highest Priority",
-    "heroSubtitle": "Experience professional, personalized primary care in Vadodara. Led by the highly-rated physician team of Dr. Roshan Rana and Dr. Komal Rana, we offer expert general medicine, pediatric care, and complete nursing home services."
+    "heroSubtitle": "Experience professional, personalized primary care in Vadodara. Led by the highly-rated physician team of Dr. Roshan Rana and Dr. Komal Rana, we offer expert general medicine, pediatric care, and complete nursing home services.",
+    "logoUrl": "/logo.png"
   },
   "theme": {
     "primaryHue": 172,

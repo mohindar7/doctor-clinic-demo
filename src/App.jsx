@@ -60,8 +60,12 @@ export default function App() {
       {/* Navigation Header */}
       <header className="header">
         <div className="container nav">
-          <a href="#" className="logo">
-            <span className="logo-icon">{config.clinic.name[0]}</span>
+          <a href="#" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {config.clinic.logoUrl ? (
+              <img src={config.clinic.logoUrl} alt={`${config.clinic.name} Logo`} style={{ height: '44px', borderRadius: '8px', objectFit: 'contain' }} />
+            ) : (
+              <span className="logo-icon">{config.clinic.name[0]}</span>
+            )}
             {config.clinic.name}
           </a>
           <ul className="nav-links">
@@ -250,8 +254,12 @@ export default function App() {
       <footer className="footer">
         <div className="container">
           <div className="footer-content">
-            <a href="#" className="logo">
-              <span className="logo-icon">{config.clinic.name[0]}</span>
+            <a href="#" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              {config.clinic.logoUrl ? (
+                <img src={config.clinic.logoUrl} alt={`${config.clinic.name} Logo`} style={{ height: '40px', borderRadius: '8px', objectFit: 'contain' }} />
+              ) : (
+                <span className="logo-icon">{config.clinic.name[0]}</span>
+              )}
               {config.clinic.name}
             </a>
             <ul className="footer-nav">
