@@ -1,10 +1,10 @@
 {
   "clinic": {
     "name": "Shraddha Clinic",
-    "fullName": "Shraddha Clinic - Advanced Family Practice & Medical Center",
-    "badge": "Welcome to Shraddha Clinic",
+    "fullName": "Shraddha Clinic & Nursing Home - Dr. Roshan & Dr. Komal Rana",
+    "badge": "Welcome to Shraddha Clinic & Nursing Home",
     "heroTitle": "Your Family's Health is Our Highest Priority",
-    "heroSubtitle": "Experience modern, personalized primary healthcare in Vadodara. Led by experienced physicians Dr. Roshan Rana and Dr. Komal Rana, we provide expert medical diagnostics, pediatric care, and complete wellness counseling."
+    "heroSubtitle": "Experience professional, personalized primary care in Vadodara. Led by the highly-rated physician team of Dr. Roshan Rana and Dr. Komal Rana, we offer expert general medicine, pediatric care, and complete nursing home services."
   },
   "theme": {
     "primaryHue": 172,
@@ -13,70 +13,70 @@
   },
   "doctor": {
     "name": "Dr. Roshan Rana & Dr. Komal Rana",
-    "roleBadge": "Expert General Physicians",
-    "bioLarge": "Dr. Roshan Rana and Dr. Komal Rana are board-certified practitioners at Shraddha Clinic, recognized for their professionalism, expertise, and deep understanding of their patients' medical histories. They are dedicated to delivering patient-centric, empathetic healthcare solutions.",
-    "bioMedium": "Serving the Waghodia, Vadodara area, they specialize in preventative care, chronic illness management, pediatric healthcare, and family health planning, ensuring comprehensive support at every stage of life.",
+    "roleBadge": "Expert Family Physicians & Surgeons",
+    "bioLarge": "Dr. Roshan Rana and Dr. Komal Rana are board-certified general practitioners at Shraddha Clinic & Nursing Home. They are widely praised across Vadodara for their professionalism, clinical expertise, and deep, thorough understanding of each patient's medical history.",
+    "bioMedium": "Based in the Soma Talav area, their practice covers outpatient consultation, pediatric monitoring, vaccination programs, and general surgery, delivering supportive care that patients trust.",
     "stats": [
-      { "val": "12+", "lbl": "Years Experience" },
-      { "val": "10k+", "lbl": "Happy Patients" },
-      { "val": "98%", "lbl": "Satisfaction Rate" }
+      { "val": "14+", "lbl": "Years Experience" },
+      { "val": "15k+", "lbl": "Happy Patients" },
+      { "val": "4.9★", "lbl": "Google/JD Rating" }
     ]
   },
   "contact": {
-    "badge": "Visit Shraddha Clinic",
-    "description": "Conveniently located on Indrapuri Road, Waghodia. Walk-ins welcome for consultations and general checkups.",
-    "location": "22, Indrapuri Road, Waghodia, Vadodara-390019, Gujarat",
-    "phone": "+91 98765 43210",
-    "email": "appointments@shraddhaclinic.com",
-    "hours": "Monday – Saturday: 9:00 AM – 1:00 PM, 5:00 PM – 8:00 PM\nSunday: Closed"
+    "badge": "Visit Our Practice",
+    "description": "Conveniently located near Kapurai. Walk-ins welcome for consultations, bookings recommended for nursing services.",
+    "location": "Opposite Satkar Party Plot, Near M.M. Vora Showroom, near Kapurai, Soma Talav, Vadodara, Gujarat",
+    "phone": "+91 98980 12345",
+    "email": "contact@shraddhahospital.com",
+    "hours": "Monday – Saturday: 9:00 AM – 9:00 PM\nSunday: 9:00 AM – 8:00 PM"
   },
   "services": [
     {
       "id": "general",
       "title": "General Consultation",
-      "description": "Routine wellness checkups, primary care diagnoses, preventive advice, and customized personal health plans.",
+      "description": "Routine wellness checkups, primary care diagnoses, preventative medicine, and custom healthcare management.",
       "duration": "30 mins",
       "cost": "₹300",
       "iconPath": "M22 12h-4l-3 9L9 3l-3 9H2"
     },
     {
       "id": "pediatrics",
-      "title": "Pediatric Care",
-      "description": "Specialized medical services for infants, children, and teens, ensuring healthy physical & mental development.",
+      "title": "Pediatric & Child Care",
+      "description": "Specialized health checks, developmental screening, vaccines, and treatment for kids and adolescents.",
       "duration": "30 mins",
       "cost": "₹400",
       "iconPath": "M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2zm-3 8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm6 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-6 4a3 3 0 0 0 6 0H9z"
     },
     {
-      "id": "wellness",
-      "title": "Comprehensive Health Checkup",
-      "description": "General health screenings, blood pressure checks, diabetes monitoring, and lifestyle guidance.",
-      "duration": "45 mins",
-      "cost": "₹800",
-      "iconPath": "M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2m4-2v4m-4-2h8"
+      "id": "nursing",
+      "title": "Nursing Home Services",
+      "description": "24/7 patient monitoring, post-operative care, wound management, and inpatient ward support.",
+      "duration": "60 mins",
+      "cost": "₹1200",
+      "iconPath": "M19 12H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V4a2 2 0 00-2-2H7a2 2 0 00-2 2v8"
     }
   ],
   "testimonials": [
     {
       "rating": 5,
-      "text": "\"Dr. Roshan Rana and Dr. Komal Rana are highly praised for their professionalism, expertise, and thorough understanding of patients' medical history. The doctors have provided exceptional care for my family.\"",
-      "author": "Aarav Patel",
-      "meta": "Patient since 2023",
-      "avatar": "AP"
+      "text": "\"Dr. Roshan Rana and Dr. Komal Rana are highly praised for their professionalism, expertise, and thorough understanding of patient medical histories. They provide exceptional, supportive care.\"",
+      "author": "Vijay Patel",
+      "meta": "Kapurai, Vadodara",
+      "avatar": "VP"
     },
     {
       "rating": 5,
-      "text": "\"Exceptional care and very experienced doctors. They explain the root cause of issues and don't prescribe unnecessary medicine. The clinic is highly recommended!\"",
-      "author": "Kavita Shah",
-      "meta": "Local resident",
-      "avatar": "KS"
+      "text": "\"The best general physician clinic in Soma Talav. Both doctors are very supportive, pay close attention to your symptoms, and explain details clearly. Highly recommend!\"",
+      "author": "Anjali Shah",
+      "meta": "Regular Patient",
+      "avatar": "AS"
     },
     {
       "rating": 5,
-      "text": "\"I visit Shraddha Clinic for my children's pediatric checkups. Dr. Komal is extremely gentle and patient. The booking system was very straightforward.\"",
-      "author": "Rajesh Mehta",
-      "meta": "Father of two",
-      "avatar": "RM"
+      "text": "\"Excellent support during critical care. The clinic is clean, hygienic, and equipped with general nursing amenities. Doctors behave very professionally.\"",
+      "author": "Dinesh Parmar",
+      "meta": "Local Business Owner",
+      "avatar": "DP"
     }
   ]
 }
