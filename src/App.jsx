@@ -37,17 +37,7 @@ export default function App() {
   }, []);
 
   // Load configuration from localStorage draft or fall back to config.json
-  const [config, setConfig] = useState(() => {
-    const saved = localStorage.getItem('carepulse_config');
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch (e) {
-        console.error("Failed to parse saved config, using default", e);
-      }
-    }
-    return defaultConfig;
-  });
+  const [config, setConfig] = useState(defaultConfig);
 
 
   const openBooking = (serviceId) => {
