@@ -71,6 +71,9 @@ export default function App() {
   const { primaryHue, primarySaturation, primaryLightness } = config.theme;
   const themeStyles = `
     :root {
+      --primary-h: ${primaryHue};
+      --primary-s: ${primarySaturation}%;
+      --primary-l: ${primaryLightness}%;
       --md-sys-color-primary: hsl(${primaryHue}, ${primarySaturation}%, ${primaryLightness}%);
       --md-sys-color-primary-container: hsl(${primaryHue}, ${primarySaturation}%, 94%);
       --md-sys-color-on-primary-container: hsl(${primaryHue}, ${primarySaturation}%, 12%);
@@ -79,6 +82,9 @@ export default function App() {
       --md-sys-color-on-secondary-container: hsl(${(primaryHue + 30) % 360}, ${primarySaturation - 10}%, 15%);
     }
     .dark-theme {
+      --primary-h: ${primaryHue};
+      --primary-s: ${primarySaturation + 10}%;
+      --primary-l: 55%;
       --md-sys-color-primary: hsl(${primaryHue}, ${primarySaturation + 10}%, 55%);
       --md-sys-color-on-primary: hsl(${primaryHue}, ${primarySaturation}%, 5%);
       --md-sys-color-primary-container: hsl(${primaryHue}, ${primarySaturation - 20}%, 16%);
