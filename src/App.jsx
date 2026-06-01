@@ -80,6 +80,7 @@ export default function App() {
       --md-sys-color-secondary: hsl(${(primaryHue + 30) % 360}, ${primarySaturation - 10}%, ${primaryLightness + 5}%);
       --md-sys-color-secondary-container: hsl(${(primaryHue + 30) % 360}, ${primarySaturation - 10}%, 94%);
       --md-sys-color-on-secondary-container: hsl(${(primaryHue + 30) % 360}, ${primarySaturation - 10}%, 15%);
+      --card-hover-bg: linear-gradient(135deg, #ffffff 0%, hsl(${primaryHue}, ${primarySaturation}%, 94%) 100%);
     }
     .dark-theme {
       --primary-h: ${primaryHue};
@@ -94,6 +95,7 @@ export default function App() {
       --md-sys-color-on-secondary: hsl(${(primaryHue + 30) % 360}, ${primarySaturation - 10}%, 5%);
       --md-sys-color-secondary-container: hsl(${(primaryHue + 30) % 360}, ${primarySaturation - 20}%, 16%);
       --md-sys-color-on-secondary-container: hsl(${(primaryHue + 30) % 360}, ${primarySaturation + 15}%, 85%);
+      --card-hover-bg: linear-gradient(135deg, hsl(${primaryHue}, ${primarySaturation - 10}%, 16%) 0%, hsl(${primaryHue}, ${primarySaturation - 5}%, 22%) 100%);
     }
   `;
 
