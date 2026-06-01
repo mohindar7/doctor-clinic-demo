@@ -431,9 +431,6 @@ export default function App() {
           <li><a href="#testimonials" className="mobile-drawer-link" onClick={() => setIsDrawerOpen(false)}>Reviews</a></li>
           <li><a href="#contact" className="mobile-drawer-link" onClick={() => setIsDrawerOpen(false)}>Contact</a></li>
         </ul>
-        <button className="btn btn-filled" style={{ marginTop: 'auto', width: '100%' }} onClick={() => { setIsDrawerOpen(false); openBooking('general'); }}>
-          Book Appointment
-        </button>
       </div>
     </>
   );
