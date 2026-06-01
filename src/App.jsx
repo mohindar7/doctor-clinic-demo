@@ -373,14 +373,6 @@ export default function App() {
         onReset={handleConfigReset}
       />
 
-      {/* Floating Admin Trigger Button */}
-      <button 
-        className="admin-trigger" 
-        onClick={() => setIsAdminOpen(!isAdminOpen)}
-        title="Open Visual Site Editor"
-      >
-        ⚙️
-      </button>
 
       {/* Mobile Navigation Drawer */}
       <div className={`mobile-drawer-overlay ${isDrawerOpen ? 'open' : ''}`} onClick={() => setIsDrawerOpen(false)}></div>
