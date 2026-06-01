@@ -294,7 +294,7 @@ export default function App() {
                 style={{ border: 0 }}
                 loading="lazy"
                 allowFullScreen
-                src={`https://maps.google.com/maps?q=${encodeURIComponent(config.contact.location)}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
+                src={config.contact.mapUrl || `https://maps.google.com/maps?q=${encodeURIComponent(config.contact.location)}&t=&z=16&ie=UTF8&iwloc=near&output=embed`}
               ></iframe>
             </div>
           </div>
