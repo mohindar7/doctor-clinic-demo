@@ -59,6 +59,34 @@
   --md-elevation-3: 0px 4px 12px 4px rgba(0, 0, 0, 0.08), 0px 2px 4px 0px rgba(0, 0, 0, 0.04);
 }
 
+.dark-theme {
+  --md-sys-color-primary: hsl(172, 85%, 45%);
+  --md-sys-color-on-primary: hsl(172, 90%, 5%);
+  --md-sys-color-primary-container: hsl(172, 85%, 15%);
+  --md-sys-color-on-primary-container: hsl(172, 85%, 85%);
+  
+  --md-sys-color-secondary: hsl(205, 80%, 55%);
+  --md-sys-color-on-secondary: hsl(205, 90%, 5%);
+  --md-sys-color-secondary-container: hsl(205, 80%, 15%);
+  --md-sys-color-on-secondary-container: hsl(205, 80%, 85%);
+
+  --md-sys-color-tertiary: hsl(36, 75%, 60%);
+  --md-sys-color-on-tertiary: hsl(36, 90%, 5%);
+  --md-sys-color-tertiary-container: hsl(36, 75%, 15%);
+  --md-sys-color-on-tertiary-container: hsl(36, 75%, 85%);
+
+  --md-sys-color-surface: hsl(222, 36%, 7%);
+  --md-sys-color-on-surface: hsl(222, 20%, 95%);
+  --md-sys-color-surface-variant: hsl(222, 20%, 14%);
+  --md-sys-color-on-surface-variant: hsl(222, 15%, 80%);
+  
+  --md-sys-color-surface-container-low: hsl(222, 25%, 9%);
+  --md-sys-color-surface-container: hsl(222, 20%, 11%);
+  --md-sys-color-surface-container-high: hsl(222, 20%, 13%);
+  --md-sys-color-surface-container-highest: hsl(222, 20%, 18%);
+}
+
+
 body {
   font-family: var(--md-font-body);
   background-color: var(--md-sys-color-surface);
@@ -66,7 +94,10 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  transition: background-color var(--md-motion-duration-medium) var(--md-motion-easing-standard),
+              color var(--md-motion-duration-medium) var(--md-motion-easing-standard);
 }
+
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--md-font-display);
@@ -207,12 +238,19 @@ h1, h2, h3, h4, h5, h6 {
 .header {
   position: sticky;
   top: 0;
-  background-color: rgba(249, 251, 253, 0.8);
-  backdrop-filter: blur(16px);
+  background-color: rgba(249, 251, 253, 0.7);
+  backdrop-filter: blur(24px);
   z-index: 100;
-  transition: background-color var(--md-motion-duration-short) var(--md-motion-easing-standard);
-  border-bottom: 1px solid var(--md-sys-color-surface-container-low);
+  transition: background-color var(--md-motion-duration-short) var(--md-motion-easing-standard),
+              border-color var(--md-motion-duration-short) var(--md-motion-easing-standard);
+  border-bottom: 1px solid var(--md-sys-color-surface-variant);
 }
+
+.dark-theme .header {
+  background-color: rgba(10, 15, 30, 0.7);
+  border-bottom-color: var(--md-sys-color-surface-container-high);
+}
+
 
 .nav {
   display: flex;
@@ -323,11 +361,19 @@ h1, h2, h3, h4, h5, h6 {
 .hero-image-wrapper {
   position: relative;
   height: 480px;
-  border-radius: var(--md-shape-corner-extra-large);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   overflow: hidden;
   box-shadow: var(--md-elevation-3);
   background-color: var(--md-sys-color-surface-container-highest);
+  transition: border-radius var(--md-motion-duration-long) var(--md-motion-easing-spring),
+              transform var(--md-motion-duration-long) var(--md-motion-easing-spring);
 }
+
+.hero-image-wrapper:hover {
+  border-radius: 40% 60% 70% 30% / 50% 60% 40% 50%;
+  transform: scale(1.02) rotate(-1deg);
+}
+
 
 .hero-image {
   width: 100%;
@@ -347,9 +393,12 @@ h1, h2, h3, h4, h5, h6 {
   padding: 40px;
   border-radius: var(--md-shape-corner-large);
   box-shadow: var(--md-elevation-1);
+  border: 1px solid var(--md-sys-color-surface-variant);
   transition: transform var(--md-motion-duration-medium) var(--md-motion-easing-spring),
+              border-radius var(--md-motion-duration-medium) var(--md-motion-easing-spring),
               box-shadow var(--md-motion-duration-medium) var(--md-motion-easing-standard),
-              background-color var(--md-motion-duration-medium) var(--md-motion-easing-standard);
+              background-color var(--md-motion-duration-medium) var(--md-motion-easing-standard),
+              border-color var(--md-motion-duration-medium) var(--md-motion-easing-standard);
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -373,8 +422,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .service-card:hover {
   transform: translateY(-8px) scale(1.01);
+  border-radius: 40px 12px 40px 12px; /* Super-ellipse morphing */
   box-shadow: var(--md-elevation-3);
   background-color: var(--md-sys-color-surface-container-low);
+  border-color: var(--md-sys-color-primary-container);
 }
 
 .service-card:hover::after {
@@ -384,6 +435,7 @@ h1, h2, h3, h4, h5, h6 {
 .service-card:active {
   transform: translateY(-2px) scale(0.98);
 }
+
 
 .service-icon {
   width: 56px;
@@ -415,10 +467,18 @@ h1, h2, h3, h4, h5, h6 {
 .doctor-img-wrapper {
   position: relative;
   height: 520px;
-  border-radius: var(--md-shape-corner-large);
+  border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
   overflow: hidden;
   box-shadow: var(--md-elevation-3);
+  transition: border-radius var(--md-motion-duration-long) var(--md-motion-easing-spring),
+              transform var(--md-motion-duration-long) var(--md-motion-easing-spring);
 }
+
+.doctor-img-wrapper:hover {
+  border-radius: 60% 40% 45% 55% / 45% 55% 45% 55%;
+  transform: scale(1.02) rotate(1deg);
+}
+
 
 .doctor-img {
   width: 100%;
@@ -469,14 +529,28 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .testimonial-card {
-  background-color: var(--md-sys-color-surface);
-  padding: 30px;
-  border-radius: var(--md-shape-corner-large);
+  background-color: var(--md-sys-color-surface-container-low);
+  padding: 36px;
+  border-radius: 28px 28px 8px 28px; /* Speech bubble asymmetrical style */
   box-shadow: var(--md-elevation-1);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+  position: relative;
+  border: 1px solid var(--md-sys-color-surface-variant);
+  transition: transform var(--md-motion-duration-medium) var(--md-motion-easing-spring),
+              box-shadow var(--md-motion-duration-medium) var(--md-motion-easing-standard),
+              background-color var(--md-motion-duration-medium) var(--md-motion-easing-standard),
+              border-color var(--md-motion-duration-medium) var(--md-motion-easing-standard);
 }
+
+.testimonial-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--md-elevation-2);
+  background-color: var(--md-sys-color-surface);
+  border-color: var(--md-sys-color-secondary-container);
+}
+
 
 .testimonial-rating {
   color: hsl(45, 100%, 50%);
@@ -1123,4 +1197,117 @@ h1, h2, h3, h4, h5, h6 {
     display: flex; /* Show hamburger menu trigger on mobile */
   }
 }
+
+/* --- Premium Refined Elements --- */
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--md-shape-corner-medium);
+  border: none;
+  background-color: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--md-motion-duration-short) var(--md-motion-easing-spring),
+              background-color var(--md-motion-duration-short) var(--md-motion-easing-standard),
+              color var(--md-motion-duration-short) var(--md-motion-easing-standard);
+  outline: none;
+}
+.theme-toggle-btn:hover {
+  transform: scale(1.08) rotate(15deg);
+  background-color: var(--md-sys-color-surface-container-highest);
+}
+.theme-toggle-btn:active {
+  transform: scale(0.92) rotate(-10deg);
+}
+
+/* Booking FAB */
+.booking-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  height: 56px;
+  padding: 0 24px;
+  border-radius: var(--md-shape-corner-full);
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  border: none;
+  box-shadow: var(--md-elevation-3);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--md-font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 999;
+  transition: transform var(--md-motion-duration-short) var(--md-motion-easing-spring),
+              border-radius var(--md-motion-duration-short) var(--md-motion-easing-spring),
+              box-shadow var(--md-motion-duration-short) var(--md-motion-easing-standard);
+  outline: none;
+}
+.booking-fab:hover {
+  transform: scale(1.08) translateY(-4px);
+  border-radius: var(--md-shape-corner-large);
+  box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.15);
+}
+.booking-fab:active {
+  transform: scale(0.95) translateY(0);
+}
+.booking-fab-icon {
+  transition: transform var(--md-motion-duration-medium) var(--md-motion-easing-spring);
+}
+.booking-fab:hover .booking-fab-icon {
+  transform: rotate(15deg) scale(1.1);
+}
+
+/* Background Decorative Blur Blobs */
+.ambient-blob-1, .ambient-blob-2 {
+  position: absolute;
+  width: 45vw;
+  height: 45vw;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.12;
+  z-index: 0;
+  pointer-events: none;
+  transition: background-color var(--md-motion-duration-long) var(--md-motion-easing-standard);
+}
+.ambient-blob-1 {
+  top: -10vw;
+  left: -10vw;
+  background-color: var(--md-sys-color-primary);
+  animation: float-blob-1 25s infinite alternate ease-in-out;
+}
+.ambient-blob-2 {
+  top: 60vw;
+  right: -10vw;
+  background-color: var(--md-sys-color-secondary);
+  animation: float-blob-2 30s infinite alternate ease-in-out;
+}
+
+@keyframes float-blob-1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(50px, 80px) scale(1.1); }
+  100% { transform: translate(-20px, 40px) scale(0.95); }
+}
+
+@keyframes float-blob-2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-80px, -50px) scale(0.9); }
+  100% { transform: translate(30px, 60px) scale(1.15); }
+}
+
+/* Dynamic container tweaks for theme change */
+.section-alt {
+  transition: background-color var(--md-motion-duration-medium) var(--md-motion-easing-standard);
+}
+.testimonial-card, .service-card, .footer {
+  transition: all var(--md-motion-duration-medium) var(--md-motion-easing-standard);
+}
+
 
