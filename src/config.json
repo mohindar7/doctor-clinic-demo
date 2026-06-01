@@ -1,10 +1,10 @@
 {
   "clinic": {
-    "name": "CarePulse",
-    "fullName": "CarePulse Clinic - Advanced Medical Care & Family Practice",
-    "badge": "Welcome to CarePulse Clinic",
-    "heroTitle": "Your Health is Our Highest Priority",
-    "heroSubtitle": "Experience modern, personalized healthcare designed around your needs. Our state-of-the-art facility provides expert diagnostics, compassionate family care, and comprehensive wellness solutions."
+    "name": "Shraddha Clinic",
+    "fullName": "Shraddha Clinic - Advanced Family Practice & Medical Center",
+    "badge": "Welcome to Shraddha Clinic",
+    "heroTitle": "Your Family's Health is Our Highest Priority",
+    "heroSubtitle": "Experience modern, personalized primary healthcare in Vadodara. Led by experienced physicians Dr. Roshan Rana and Dr. Komal Rana, we provide expert medical diagnostics, pediatric care, and complete wellness counseling."
   },
   "theme": {
     "primaryHue": 172,
@@ -12,23 +12,23 @@
     "primaryLightness": 28
   },
   "doctor": {
-    "name": "Dr. Samantha Vance, MD, FACP",
-    "roleBadge": "Meet the Chief Medical Officer",
-    "bioLarge": "Dr. Samantha Vance is a double board-certified Internist and Pediatrician with over 14 years of clinical experience. She completed her residency at Johns Hopkins and is passionate about preventative healthcare, patient education, and integrated medicine.",
-    "bioMedium": "At CarePulse, Dr. Vance combines cutting-edge diagnostics with a holistic patient-centered approach. She works one-on-one with patients of all ages to design healthy lifestyles and manage chronic health issues successfully.",
+    "name": "Dr. Roshan Rana & Dr. Komal Rana",
+    "roleBadge": "Expert General Physicians",
+    "bioLarge": "Dr. Roshan Rana and Dr. Komal Rana are board-certified practitioners at Shraddha Clinic, recognized for their professionalism, expertise, and deep understanding of their patients' medical histories. They are dedicated to delivering patient-centric, empathetic healthcare solutions.",
+    "bioMedium": "Serving the Waghodia, Vadodara area, they specialize in preventative care, chronic illness management, pediatric healthcare, and family health planning, ensuring comprehensive support at every stage of life.",
     "stats": [
-      { "val": "14+", "lbl": "Years Experience" },
-      { "val": "8k+", "lbl": "Happy Patients" },
-      { "val": "99%", "lbl": "Satisfaction Rate" }
+      { "val": "12+", "lbl": "Years Experience" },
+      { "val": "10k+", "lbl": "Happy Patients" },
+      { "val": "98%", "lbl": "Satisfaction Rate" }
     ]
   },
   "contact": {
-    "badge": "Visit Our Practice",
-    "description": "Conveniently located in the Medical District. Walk-ins welcome for emergencies, bookings recommended for consults.",
-    "location": "100 Medical Plaza Drive, Suite 400, New York, NY 10016",
-    "phone": "+1 (555) 234-5678",
-    "email": "appointments@carepulseclinic.com",
-    "hours": "Monday – Friday: 8:00 AM – 6:00 PM\nSaturday: 9:00 AM – 2:00 PM\nSunday: Closed"
+    "badge": "Visit Shraddha Clinic",
+    "description": "Conveniently located on Indrapuri Road, Waghodia. Walk-ins welcome for consultations and general checkups.",
+    "location": "22, Indrapuri Road, Waghodia, Vadodara-390019, Gujarat",
+    "phone": "+91 98765 43210",
+    "email": "appointments@shraddhaclinic.com",
+    "hours": "Monday – Saturday: 9:00 AM – 1:00 PM, 5:00 PM – 8:00 PM\nSunday: Closed"
   },
   "services": [
     {
@@ -36,63 +36,47 @@
       "title": "General Consultation",
       "description": "Routine wellness checkups, primary care diagnoses, preventive advice, and customized personal health plans.",
       "duration": "30 mins",
-      "cost": "$50",
+      "cost": "₹300",
       "iconPath": "M22 12h-4l-3 9L9 3l-3 9H2"
     },
     {
       "id": "pediatrics",
       "title": "Pediatric Care",
       "description": "Specialized medical services for infants, children, and teens, ensuring healthy physical & mental development.",
-      "duration": "45 mins",
-      "cost": "$70",
+      "duration": "30 mins",
+      "cost": "₹400",
       "iconPath": "M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2zm-3 8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm6 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-6 4a3 3 0 0 0 6 0H9z"
-    },
-    {
-      "id": "cardio",
-      "title": "Cardiology Assessment",
-      "description": "In-depth cardiac checkups, ECG testing, blood pressure tracking, and expert cardiovascular consulting.",
-      "duration": "60 mins",
-      "cost": "$120",
-      "iconPath": "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-    },
-    {
-      "id": "dental",
-      "title": "Dental Cleanings & Exams",
-      "description": "Routine cleaning, cavity fillings, cosmetic dentistry, and comprehensive oral health screenings.",
-      "duration": "45 mins",
-      "cost": "$80",
-      "iconPath": "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
     },
     {
       "id": "wellness",
       "title": "Comprehensive Health Checkup",
-      "description": "Executive screening including full blood panels, kidney and liver function tests, and diagnostic body scans.",
-      "duration": "90 mins",
-      "cost": "$150",
+      "description": "General health screenings, blood pressure checks, diabetes monitoring, and lifestyle guidance.",
+      "duration": "45 mins",
+      "cost": "₹800",
       "iconPath": "M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2m4-2v4m-4-2h8"
     }
   ],
   "testimonials": [
     {
       "rating": 5,
-      "text": "\"Dr. Vance is incredible. She actually listens to your concerns and explains things in a way that makes complete sense. The scheduling was easy, and the clinic lobby looks like a premium hotel!\"",
-      "author": "Alex Mercer",
-      "meta": "Patient since 2024",
-      "avatar": "AM"
+      "text": "\"Dr. Roshan Rana and Dr. Komal Rana are highly praised for their professionalism, expertise, and thorough understanding of patients' medical history. The doctors have provided exceptional care for my family.\"",
+      "author": "Aarav Patel",
+      "meta": "Patient since 2023",
+      "avatar": "AP"
     },
     {
       "rating": 5,
-      "text": "\"I brought my daughter here for a pediatric checkup. The staff made her feel completely safe and happy. Highly recommend CarePulse for anyone looking for a reliable family doctor.\"",
-      "author": "Clara Rodriguez",
-      "meta": "Parent & Patient",
-      "avatar": "CR"
+      "text": "\"Exceptional care and very experienced doctors. They explain the root cause of issues and don't prescribe unnecessary medicine. The clinic is highly recommended!\"",
+      "author": "Kavita Shah",
+      "meta": "Local resident",
+      "avatar": "KS"
     },
     {
       "rating": 5,
-      "text": "\"Superb diagnostic facilities. They ran my executive checkup and provided clear, actionable reports in just 24 hours. The online appointment scheduling worked flawlessly.\"",
-      "author": "David Bennett",
-      "meta": "Corporate Patient",
-      "avatar": "DB"
+      "text": "\"I visit Shraddha Clinic for my children's pediatric checkups. Dr. Komal is extremely gentle and patient. The booking system was very straightforward.\"",
+      "author": "Rajesh Mehta",
+      "meta": "Father of two",
+      "avatar": "RM"
     }
   ]
 }
