@@ -286,25 +286,16 @@ export default function App() {
               </div>
             </div>
 
-            <div className="contact-map-wrapper">
-              <div style={{
-                width: '100%',
-                height: '100%',
-                backgroundColor: 'var(--md-sys-color-surface-container-high)',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'var(--md-sys-color-on-surface-variant)',
-                padding: '40px',
-                textAlign: 'center'
-              }}>
-                <span style={{ fontSize: '3rem', marginBottom: '12px' }}>🗺️</span>
-                <h3>Interactive Map Placeholder</h3>
-                <p className="body-medium" style={{ maxWidth: '300px', marginTop: '4px' }}>
-                  In production, this displays a live Google Map centered at {config.contact.location}.
-                </p>
-              </div>
+            <div className="contact-map-wrapper" style={{ height: '380px', overflow: 'hidden' }}>
+              <iframe
+                title="Google Maps Location"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(config.contact.location)}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
+              ></iframe>
             </div>
           </div>
         </section>
