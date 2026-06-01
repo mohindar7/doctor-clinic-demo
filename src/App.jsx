@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ServiceCard from './components/ServiceCard';
 import BookingModal from './components/BookingModal';
-import AdminEditor from './components/AdminEditor';
+
 import defaultConfig from './config.json';
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedServiceId, setSelectedServiceId] = useState('general');
-  const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -37,17 +36,6 @@ export default function App() {
     return defaultConfig;
   });
 
-  const handleConfigUpdate = (newConfig) => {
-    setConfig(newConfig);
-    localStorage.setItem('carepulse_config', JSON.stringify(newConfig));
-  };
-
-  const handleConfigReset = () => {
-    if (confirm('Reset all changes back to original defaults? This will erase your current edits.')) {
-      setConfig(defaultConfig);
-      localStorage.removeItem('carepulse_config');
-    }
-  };
 
   const openBooking = (serviceId) => {
     setSelectedServiceId(serviceId || 'general');
@@ -364,14 +352,6 @@ export default function App() {
         initialServiceId={selectedServiceId}
       />
 
-      {/* Visual Admin Panel Editor */}
-      <AdminEditor
-        isOpen={isAdminOpen}
-        onClose={() => setIsAdminOpen(false)}
-        config={config}
-        onUpdate={handleConfigUpdate}
-        onReset={handleConfigReset}
-      />
 
 
       {/* Mobile Navigation Drawer */}
