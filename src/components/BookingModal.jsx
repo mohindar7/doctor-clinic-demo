@@ -29,21 +29,52 @@ export default function BookingModal() {
   const [selectedService, setSelectedService] = useState('general');
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', note: '' });
+  
+  // Persistent patient info with local storage cache
+  const [formData, setFormData] = useState(() => {
+    try {
+      const saved = localStorage.getItem('carepulse_patient_info');
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch (e) {
+      console.error('Failed to load cached patient info:', e);
+    }
+    return { name: '', email: '', phone: '', note: '' };
+  });
 
+  const timeSlotsRef = React.useRef(null);
   const dates = getNextBusinessDays();
   const services = config.services || [];
 
-  // Reset/sync modal state when open changes
+  // Save patient profile info changes to local cache
+  useEffect(() => {
+    try {
+      localStorage.setItem('carepulse_patient_info', JSON.stringify(formData));
+    } catch (e) {
+      console.error('Failed to save patient info to cache:', e);
+    }
+  }, [formData]);
+
+  // Reset wizard progress and single-use notes, but keep profile details
   useEffect(() => {
     if (isModalOpen) {
       setStep(1);
       setSelectedService(selectedServiceId || 'general');
       setSelectedDate(null);
       setSelectedTime(null);
-      setFormData({ name: '', email: '', phone: '', note: '' });
+      setFormData(prev => ({ ...prev, note: '' }));
     }
   }, [isModalOpen, selectedServiceId]);
+
+  // Smooth-scroll focus to time slots container on date selection
+  useEffect(() => {
+    if (selectedDate && timeSlotsRef.current) {
+      setTimeout(() => {
+        timeSlotsRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 120);
+    }
+  }, [selectedDate]);
 
   if (!isModalOpen) return null;
 
@@ -54,8 +85,16 @@ export default function BookingModal() {
     cost: '₹300'
   };
 
+  // Safe dismiss confirmation to prevent accidental loss
   const handleClose = () => {
-    closeBooking();
+    const hasProgress = selectedDate || selectedTime || formData.note;
+    if (step < 4 && hasProgress) {
+      if (window.confirm("Are you sure you want to cancel booking? Your selected date and time will be lost.")) {
+        closeBooking();
+      }
+    } else {
+      closeBooking();
+    }
   };
 
   const handleServiceSelect = (id) => {
@@ -109,7 +148,7 @@ export default function BookingModal() {
   };
 
   return (
-    <div className={`modal-overlay ${isModalOpen ? 'open' : ''}`} onClick={handleClose}>
+    <div className={`modal-overlay ${isModalOpen ? 'open' : ''}`}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2>Book an Appointment</h2>
@@ -182,7 +221,7 @@ export default function BookingModal() {
 
               {selectedDate && (
                 <>
-                  <h4 style={{ fontSize: '1rem', marginBottom: '8px', marginTop: '16px' }}>Available Time Slots</h4>
+                  <h4 ref={timeSlotsRef} style={{ fontSize: '1rem', marginBottom: '8px', marginTop: '16px' }}>Available Time Slots</h4>
                   <div className="time-slots">
                     {TIME_SLOTS.map((slot) => {
                       const isSelected = selectedTime === slot;
