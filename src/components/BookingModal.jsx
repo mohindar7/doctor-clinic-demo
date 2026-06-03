@@ -72,9 +72,39 @@ export default function BookingModal() {
     setStep(step - 1);
   };
 
+  const getWhatsAppUrl = () => {
+    const dateString = selectedDate?.toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+    });
+    
+    const message = `Hello *${config.clinic.name}*,\n\nI would like to book an appointment:\n` +
+      `- *Service:* ${currentService.title}\n` +
+      `- *Date:* ${dateString}\n` +
+      `- *Time:* ${selectedTime}\n` +
+      `- *Patient Name:* ${formData.name}\n` +
+      `- *Phone Number:* ${formData.phone}\n` +
+      `- *Email:* ${formData.email}\n` +
+      (formData.note ? `- *Note:* ${formData.note}\n` : '') +
+      `\nPlease verify availability and confirm my visit. Thank you!`;
+
+    const cleanPhone = (config.contact?.phone || '+919327787679').replace(/\D/g, '');
+    return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone) return;
+    
+    try {
+      const waUrl = getWhatsAppUrl();
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+    } catch (err) {
+      console.error('Failed to open WhatsApp window:', err);
+    }
+    
     setStep(4); // Success step
   };
 
@@ -236,27 +266,57 @@ export default function BookingModal() {
 
           {/* STEP 4: Success Message */}
           {step === 4 && (
-            <div className="success-card fade-in">
-              <div className="success-icon">✓</div>
-              <h2>Booking Confirmed!</h2>
-              <p className="body-large" style={{ marginTop: '8px' }}>
-                Thank you, <strong>{formData.name}</strong>. Your appointment has been scheduled successfully.
+            <div className="success-card fade-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+              <div className="success-icon" style={{ backgroundColor: 'var(--md-sys-color-primary-container)', color: 'var(--md-sys-color-on-primary-container)' }}>✓</div>
+              <h2 style={{ marginTop: '12px' }}>Request Prepared!</h2>
+              <p className="body-large" style={{ marginTop: '8px', fontSize: '0.95rem', lineHeight: '1.4' }}>
+                Thank you, <strong>{formData.name}</strong>. Please click the button below to send your details via WhatsApp and finalize your booking.
               </p>
+
+              <a
+                href={getWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn"
+                style={{
+                  backgroundColor: '#25D366',
+                  color: '#ffffff',
+                  marginTop: '16px',
+                  width: '100%',
+                  padding: '14px 20px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  borderRadius: 'var(--md-shape-corner-large)',
+                  textDecoration: 'none',
+                  fontWeight: '700',
+                  boxShadow: '0 4px 12px rgba(37, 211, 102, 0.2)',
+                  transition: 'transform var(--md-motion-duration-short) var(--md-motion-easing-spring)'
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.949h.004c4.368 0 7.926-3.558 7.93-7.93a7.9 7.9 0 0 0-2.327-5.594ZM7.994 14.52a6.57 6.57 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.69-4.294c-.202-.102-1.202-.594-1.387-.662-.186-.068-.322-.102-.457.102-.136.2-.524.662-.643.797-.12.134-.238.153-.44.05-.202-.1-.851-.313-1.62-.999-.597-.533-1-1.192-1.118-1.394-.118-.2-.013-.308.088-.408.09-.09.2-.234.3-.35.1-.117.133-.198.2-.33.067-.133.034-.25-.018-.35-.052-.102-.458-1.102-.626-1.507-.164-.399-.333-.344-.457-.35-.119-.005-.255-.005-.39-.005-.136 0-.356.05-.542.253-.186.2-.712.696-.712 1.698 0 1.002.729 1.97 1.23 2.983 6.133 5.4 10.843 8.358 13.064 9.176.52.193 1.025.184 1.41.127.43-.064 1.32-.54 1.507-1.061.186-.52.186-1.002.131-1.102-.056-.1-.202-.15-.403-.25Z"/>
+                </svg>
+                Send Request via WhatsApp
+              </a>
+
               <div style={{
                 backgroundColor: 'var(--md-sys-color-surface-container)',
-                padding: '20px',
+                padding: '16px 20px',
                 borderRadius: 'var(--md-shape-corner-medium)',
                 width: '100%',
                 marginTop: '16px',
-                textAlign: 'left'
+                textAlign: 'left',
+                fontSize: '0.85rem'
               }}>
-                <div style={{ marginBottom: '8px' }}><strong>Service:</strong> {currentService.title}</div>
-                <div style={{ marginBottom: '8px' }}><strong>Date:</strong> {selectedDate?.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}</div>
-                <div style={{ marginBottom: '8px' }}><strong>Time:</strong> {selectedTime}</div>
-                <div><strong>Location:</strong> Suite 400, CarePulse Medical Plaza</div>
+                <div style={{ marginBottom: '6px' }}><strong>Service:</strong> {currentService.title}</div>
+                <div style={{ marginBottom: '6px' }}><strong>Date:</strong> {selectedDate?.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}</div>
+                <div style={{ marginBottom: '6px' }}><strong>Time:</strong> {selectedTime}</div>
+                <div><strong>Location:</strong> {config.contact?.location || 'Shraddha Clinic'}</div>
               </div>
-              <p className="body-medium" style={{ opacity: 0.8, fontSize: '0.85rem' }}>
-                A confirmation email and SMS reminder have been sent.
+              <p className="body-medium" style={{ opacity: 0.7, fontSize: '0.8rem', marginTop: '12px' }}>
+                Note: Clicking the button will open WhatsApp with your prefilled message ready to send.
               </p>
             </div>
           )}
