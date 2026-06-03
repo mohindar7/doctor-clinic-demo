@@ -150,6 +150,7 @@ export default function BookingModal() {
   return (
     <div className={`modal-overlay ${isModalOpen ? 'open' : ''}`}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-drag-handle" />
         <div className="modal-header">
           <h2>Book an Appointment</h2>
           <button className="modal-close-btn" onClick={handleClose}>&times;</button>
@@ -303,24 +304,133 @@ export default function BookingModal() {
             </form>
           )}
 
-          {/* STEP 4: Success Message */}
+          {/* STEP 4: Success Message / Action */}
           {step === 4 && (
-            <div className="success-card fade-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-              <div className="success-icon" style={{ backgroundColor: 'var(--md-sys-color-primary-container)', color: 'var(--md-sys-color-on-primary-container)' }}>✓</div>
-              <h2 style={{ marginTop: '12px' }}>Request Prepared!</h2>
-              <p className="body-large" style={{ marginTop: '8px', fontSize: '0.95rem', lineHeight: '1.4' }}>
-                Thank you, <strong>{formData.name}</strong>. Please click the button below to send your details via WhatsApp and finalize your booking.
-              </p>
+            <div className="success-card fade-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '16px' }}>
+              <div className="success-icon" style={{ backgroundColor: 'var(--md-sys-color-primary-container)', color: 'var(--md-sys-color-primary)', width: '64px', height: '64px', fontSize: '1.8rem', animation: 'success-bounce 1s var(--md-motion-easing-spring) infinite alternate' }}>✓</div>
+              <h2 style={{ marginTop: '4px' }}>Request Prepared!</h2>
+              
+              {/* Alert Card: Action Required */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '12px',
+                backgroundColor: 'hsla(36, 85%, 50%, 0.12)',
+                border: '1px dashed var(--md-sys-color-tertiary)',
+                color: 'var(--md-sys-color-on-surface)',
+                padding: '12px 16px',
+                borderRadius: '16px',
+                width: '100%',
+                textAlign: 'left',
+                fontSize: '0.82rem',
+                lineHeight: '1.45'
+              }}>
+                <span style={{ fontSize: '1.2rem', lineHeight: 1 }}>⚠️</span>
+                <span><strong>Action Required:</strong> Your booking is <strong>not finalized</strong> yet. You must complete the steps below to send the request via WhatsApp.</span>
+              </div>
+
+              {/* Step Guide */}
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '10px',
+                width: '100%',
+                textAlign: 'left',
+                padding: '4px 0'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span style={{
+                    width: '22px',
+                    height: '22px',
+                    borderRadius: '50%',
+                    backgroundColor: 'var(--md-sys-color-primary-container)',
+                    color: 'var(--md-sys-color-primary)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: '800',
+                    fontSize: '0.75rem',
+                    flexShrink: 0
+                  }}>1</span>
+                  <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--md-sys-color-on-surface-variant)' }}>Tap the green button below.</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span style={{
+                    width: '22px',
+                    height: '22px',
+                    borderRadius: '50%',
+                    backgroundColor: 'var(--md-sys-color-primary-container)',
+                    color: 'var(--md-sys-color-primary)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: '800',
+                    fontSize: '0.75rem',
+                    flexShrink: 0
+                  }}>2</span>
+                  <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--md-sys-color-on-surface-variant)' }}>WhatsApp will open with a pre-filled message.</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span style={{
+                    width: '22px',
+                    height: '22px',
+                    borderRadius: '50%',
+                    backgroundColor: 'var(--md-sys-color-primary-container)',
+                    color: 'var(--md-sys-color-primary)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: '800',
+                    fontSize: '0.75rem',
+                    flexShrink: 0
+                  }}>3</span>
+                  <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--md-sys-color-on-surface-variant)' }}>Tap <strong style={{ color: '#128C7E' }}>Send</strong> inside WhatsApp to finish!</span>
+                </div>
+              </div>
+
+              {/* Chat Bubble Message Preview */}
+              <div style={{
+                position: 'relative',
+                backgroundColor: 'var(--md-sys-color-surface-container-high)',
+                border: '1px solid var(--md-sys-color-surface-container-highest)',
+                borderRadius: '16px 16px 16px 0',
+                padding: '16px',
+                textAlign: 'left',
+                width: '100%',
+                fontSize: '0.8rem',
+                fontFamily: 'var(--md-font-body)',
+                color: 'var(--md-sys-color-on-surface)',
+                boxShadow: 'var(--md-elevation-1)',
+                lineHeight: '1.4'
+              }}>
+                <div style={{
+                  position: 'absolute',
+                  top: '-8px',
+                  right: '12px',
+                  backgroundColor: 'var(--md-sys-color-secondary)',
+                  color: 'var(--md-sys-color-on-secondary)',
+                  fontSize: '0.62rem',
+                  fontWeight: '800',
+                  padding: '2px 8px',
+                  borderRadius: '10px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}>
+                  Message Preview
+                </div>
+                <div style={{ fontWeight: '700', color: 'var(--md-sys-color-primary)', marginBottom: '4px' }}>To: {config.clinic.name}</div>
+                <div style={{ whiteSpace: 'pre-wrap', opacity: 0.9 }}>
+                  {`Hello ${config.clinic.name},\nI would like to book a: *${currentService.title}*\nDate: ${selectedDate?.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}\nTime: ${selectedTime}\nName: ${formData.name}`}
+                </div>
+              </div>
 
               <a
                 href={getWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn"
+                className="btn btn-whatsapp-pulse"
                 style={{
-                  backgroundColor: '#25D366',
-                  color: '#ffffff',
-                  marginTop: '16px',
+                  marginTop: '8px',
                   width: '100%',
                   padding: '14px 20px',
                   display: 'inline-flex',
@@ -329,9 +439,7 @@ export default function BookingModal() {
                   gap: '8px',
                   borderRadius: 'var(--md-shape-corner-large)',
                   textDecoration: 'none',
-                  fontWeight: '700',
-                  boxShadow: '0 4px 12px rgba(37, 211, 102, 0.2)',
-                  transition: 'transform var(--md-motion-duration-short) var(--md-motion-easing-spring)'
+                  fontWeight: '700'
                 }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
@@ -342,21 +450,20 @@ export default function BookingModal() {
 
               <div style={{
                 backgroundColor: 'var(--md-sys-color-surface-container)',
-                padding: '16px 20px',
+                padding: '12px 16px',
                 borderRadius: 'var(--md-shape-corner-medium)',
                 width: '100%',
-                marginTop: '16px',
                 textAlign: 'left',
-                fontSize: '0.85rem'
+                fontSize: '0.8rem',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px'
               }}>
-                <div style={{ marginBottom: '6px' }}><strong>Service:</strong> {currentService.title}</div>
-                <div style={{ marginBottom: '6px' }}><strong>Date:</strong> {selectedDate?.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}</div>
-                <div style={{ marginBottom: '6px' }}><strong>Time:</strong> {selectedTime}</div>
+                <div><strong>Service:</strong> {currentService.title}</div>
+                <div><strong>Date:</strong> {selectedDate?.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}</div>
+                <div><strong>Time:</strong> {selectedTime}</div>
                 <div><strong>Location:</strong> {config.contact?.location || 'Shraddha Clinic'}</div>
               </div>
-              <p className="body-medium" style={{ opacity: 0.7, fontSize: '0.8rem', marginTop: '12px' }}>
-                Note: Clicking the button will open WhatsApp with your prefilled message ready to send.
-              </p>
             </div>
           )}
         </div>
