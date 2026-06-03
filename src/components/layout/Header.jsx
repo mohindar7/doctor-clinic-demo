@@ -24,84 +24,69 @@ export default function Header() {
         <a
           href="#"
           className="logo"
-          style={{ display: 'flex', alignItems: 'center', gap: '12px' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}
         >
           {config.clinic.logoUrl ? (
             <>
               <img
                 src={config.clinic.logoUrl}
                 alt={`${config.clinic.name} Logo`}
-                style={{ height: '40px', width: 'auto', objectFit: 'contain' }}
+                style={{ height: '42px', width: 'auto', objectFit: 'contain' }}
               />
-              <span style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--md-sys-color-primary)', whiteSpace: 'nowrap' }}>
-                {config.clinic.name}
-              </span>
-              {/* Live Status Badge next to clinic name */}
-              <div
-                className="status-badge"
-                style={{
-                  display: 'inline-flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                  gap: '2px',
-                  padding: '4px 10px',
-                  borderRadius: '12px',
-                  backgroundColor: 'var(--md-sys-color-surface-container-high)',
-                  boxShadow: 'var(--md-elevation-1)',
-                  whiteSpace: 'nowrap',
-                  marginLeft: '4px'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', lineHeight: 1.1 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', justifyContent: 'center' }}>
+                <span style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--md-sys-color-primary)', whiteSpace: 'nowrap', lineHeight: 1.15 }}>
+                  {config.clinic.name}
+                </span>
+                
+                {/* Live Status Inline Row */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap', lineHeight: 1 }}>
                   <span
                     className="status-badge-dot"
                     style={{
                       width: '6px',
                       height: '6px',
                       color: status.color,
-                      backgroundColor: status.color
+                      backgroundColor: status.color,
+                      borderRadius: '50%',
+                      flexShrink: 0
                     }}
                   />
-                  <span style={{ fontSize: '0.72rem', fontWeight: '800', color: 'var(--md-sys-color-on-surface-variant)' }}>
+                  <span style={{ fontSize: '0.72rem', fontWeight: '700', color: status.color }}>
                     {status.statusLabel}
                   </span>
+                  <span style={{ fontSize: '0.66rem', fontWeight: '500', color: 'var(--md-sys-color-on-surface-variant)', opacity: 0.8 }}>
+                    • {status.timeLabel}
+                  </span>
                 </div>
-                <span style={{ fontSize: '0.62rem', fontWeight: '500', color: 'var(--md-sys-color-on-surface-variant)', opacity: 0.8, paddingLeft: '12px', lineHeight: 1.1 }}>
-                  {status.timeLabel}
-                </span>
               </div>
             </>
           ) : (
             <>
               <span className="logo-icon">{config.clinic.name[0]}</span>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                <span style={{ fontSize: '1.25rem', fontWeight: 800, lineHeight: 1.1 }}>
+                <span style={{ fontSize: '1.2rem', fontWeight: 800, lineHeight: 1.15 }}>
                   {config.clinic.name}
                 </span>
-                {/* Live Status Badge next to text title */}
-                <div
-                  className="status-badge"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    fontSize: '0.72rem',
-                    fontWeight: '700',
-                    color: 'var(--md-sys-color-on-surface-variant)',
-                    whiteSpace: 'nowrap',
-                    lineHeight: 1
-                  }}
-                >
+                
+                {/* Live Status Inline Row */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap', lineHeight: 1 }}>
                   <span
                     className="status-badge-dot"
                     style={{
                       width: '6px',
                       height: '6px',
                       color: status.color,
-                      backgroundColor: status.color
+                      backgroundColor: status.color,
+                      borderRadius: '50%',
+                      flexShrink: 0
                     }}
                   />
-                  <span>{status.text}</span>
+                  <span style={{ fontSize: '0.72rem', fontWeight: '700', color: status.color }}>
+                    {status.statusLabel}
+                  </span>
+                  <span style={{ fontSize: '0.66rem', fontWeight: '500', color: 'var(--md-sys-color-on-surface-variant)', opacity: 0.8 }}>
+                    • {status.timeLabel}
+                  </span>
                 </div>
               </div>
             </>
