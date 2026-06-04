@@ -443,7 +443,7 @@ export default function BookingModal() {
                   fontWeight: '700'
                 }}
               >
-                <WhatsAppIcon size={18} />
+                <WhatsAppIcon size={24} />
                 Send Request via WhatsApp
               </a>
 

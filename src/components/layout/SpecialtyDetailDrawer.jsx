@@ -109,7 +109,7 @@ export default function SpecialtyDetailDrawer() {
             Back to List
           </Button>
           <Button variant="filled" onClick={handleProceedToBooking} style={{ flex: 2, gap: '8px' }}>
-            <WhatsAppIcon size={18} />
+            <WhatsAppIcon size={24} />
             Schedule Visit
           </Button>
         </div>

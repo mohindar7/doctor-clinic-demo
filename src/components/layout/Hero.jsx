@@ -23,7 +23,7 @@ export default function Hero() {
         <p className="body-large">{config.clinic.heroSubtitle}</p>
         <div className="hero-actions">
           <Button variant="filled" onClick={() => openBooking('general')} style={{ gap: '8px' }}>
-            <WhatsAppIcon size={18} />
+            <WhatsAppIcon size={24} />
             Schedule A Visit
           </Button>
           <a href="#services" className="btn btn-outlined">
