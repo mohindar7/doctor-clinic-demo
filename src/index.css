@@ -1287,11 +1287,54 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(0.92) rotate(-10deg);
 }
 
-/* Booking FAB */
-.booking-fab {
+/* Floating Action Container */
+.floating-actions-container {
   position: fixed;
   bottom: 24px;
   right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 999;
+}
+
+/* Call FAB - M3 Expressive squircle button */
+.call-fab {
+  width: 56px;
+  height: 56px;
+  border-radius: 20px 8px 20px 8px; /* Asymmetric squircle matching M3 theme */
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-primary); /* Use primary color on container background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--md-elevation-2);
+  transition: transform var(--md-motion-duration-medium) var(--md-motion-easing-spring),
+              border-radius var(--md-motion-duration-medium) var(--md-motion-easing-standard),
+              background-color var(--md-motion-duration-short) var(--md-motion-easing-standard),
+              color var(--md-motion-duration-short) var(--md-motion-easing-standard),
+              box-shadow var(--md-motion-duration-short) var(--md-motion-easing-standard);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.call-fab:hover {
+  transform: translateY(-6px) scale(1.08);
+  border-radius: 8px 20px 8px 20px; /* Morphing shape on hover */
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  box-shadow: var(--md-elevation-3);
+}
+
+.call-fab:active {
+  transform: translateY(-2px) scale(0.95);
+  border-radius: 12px;
+}
+
+/* Booking FAB */
+.booking-fab {
   height: 56px;
   padding: 0 24px;
   border-radius: 32px 12px 32px 12px; /* Start with asymmetric M3 Squircle shape */
@@ -1306,7 +1349,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   font-size: 1rem;
   cursor: pointer;
-  z-index: 999;
   filter: brightness(1);
   transition: transform var(--md-motion-duration-medium) var(--md-motion-easing-spring),
               border-radius var(--md-motion-duration-medium) var(--md-motion-easing-standard),
