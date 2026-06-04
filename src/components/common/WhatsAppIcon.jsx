@@ -1,4 +1,5 @@
 import React from 'react';
+import whatsappLogo from '../../assets/whatsapp.png';
 
 /**
  * Reusable WhatsApp PNG Icon component.
@@ -7,7 +8,7 @@ import React from 'react';
 export default function WhatsAppIcon({ size = 20, style = {}, className = '' }) {
   return (
     <img
-      src="/whatsapp.png"
+      src={whatsappLogo}
       alt="WhatsApp Icon"
       width={size}
       height={size}
