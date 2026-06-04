@@ -75,8 +75,8 @@ function AppContent() {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="22"
-            height="22"
+            width="16"
+            height="16"
             fill="currentColor"
             viewBox="0 0 16 16"
           >
@@ -88,7 +88,7 @@ function AppContent() {
           onClick={() => openBooking('general')}
           title="Schedule Appointment"
         >
-          <WhatsAppIcon size={24} className="booking-fab-icon" style={{ marginRight: '6px' }} />
+          <WhatsAppIcon size={18} className="booking-fab-icon" style={{ marginRight: '6px' }} />
           <span className="booking-fab-text">Book Visit</span>
         </button>
       </div>
