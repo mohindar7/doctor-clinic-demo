@@ -27,7 +27,7 @@ import SpecialtyDetailDrawer from './components/layout/SpecialtyDetailDrawer';
  * Resides inside the AppProvider to consume shared states.
  */
 function AppContent() {
-  const { openBooking, config } = useApp();
+  const { openBooking, config, isDrawerOpen } = useApp();
   const cleanPhone = config.contact.phone.replace(/\D/g, '');
 
   return (
@@ -65,7 +65,7 @@ function AppContent() {
       <MobileDrawer />
 
       {/* Floating Action Buttons (FABs) for Quick Actions */}
-      <div className="floating-actions-container">
+      <div className={`floating-actions-container ${isDrawerOpen ? 'drawer-open' : ''}`}>
         <button
           className="booking-fab"
           onClick={() => openBooking('general')}

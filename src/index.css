@@ -1308,8 +1308,16 @@ h1, h2, h3, h4, h5, h6 {
 
 .footer {
   background-color: var(--md-sys-color-surface-container-high);
-  padding: 60px 0 40px 0;
-  border-top: 1px solid var(--md-sys-color-surface-container-highest);
+  padding: 48px 24px 32px 24px;
+  border-radius: var(--md-shape-corner-extra-large); /* 32px M3 Extra-Large */
+  margin: 0 24px 32px 24px;
+  border: 1px solid var(--md-sys-color-surface-container-highest);
+  box-shadow: var(--md-elevation-1);
+}
+
+.dark-theme .footer {
+  background-color: var(--md-sys-color-surface-container-low);
+  border-color: rgba(255, 255, 255, 0.05);
 }
 
 .footer-content {
@@ -1318,7 +1326,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   flex-wrap: wrap;
   gap: 30px;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 .footer-nav {
@@ -1340,14 +1348,44 @@ h1, h2, h3, h4, h5, h6 {
 .footer-divider {
   height: 1px;
   background-color: var(--md-sys-color-surface-container-highest);
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .footer-bottom {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 0.85rem;
   color: var(--md-sys-color-on-surface-variant);
+}
+
+@media (max-width: 768px) {
+  .footer {
+    margin: 0 16px 24px 16px;
+    padding: 32px 16px 24px 16px;
+    border-radius: var(--md-shape-corner-large);
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  
+  .footer-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 20px;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
 }
 
 /* Booking Modal Sheets & Dialogs - Scrollable, spring motion, premium layout */
@@ -2049,7 +2087,7 @@ h1, h2, h3, h4, h5, h6 {
 .theme-toggle-btn {
   width: 44px;
   height: 44px;
-  border-radius: var(--md-shape-corner-medium);
+  border-radius: var(--md-shape-corner-full); /* Perfect circle for floating action */
   border: none;
   background-color: var(--md-sys-color-surface-container-high);
   color: var(--md-sys-color-on-surface);
@@ -2061,6 +2099,7 @@ h1, h2, h3, h4, h5, h6 {
               background-color var(--md-motion-duration-short) var(--md-motion-easing-standard),
               color var(--md-motion-duration-short) var(--md-motion-easing-standard);
   outline: none;
+  box-shadow: var(--md-elevation-1);
 }
 .theme-toggle-btn:hover {
   transform: scale(1.08) rotate(15deg);
@@ -2080,6 +2119,14 @@ h1, h2, h3, h4, h5, h6 {
   align-items: flex-end;
   gap: 8px; /* tight spacing */
   z-index: 999;
+  transition: opacity var(--md-motion-duration-medium) var(--md-motion-easing-standard),
+              transform var(--md-motion-duration-medium) var(--md-motion-easing-spring);
+}
+
+.floating-actions-container.drawer-open {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9) translateY(12px);
 }
 
 /* Call FAB - M3 Expressive round button */
