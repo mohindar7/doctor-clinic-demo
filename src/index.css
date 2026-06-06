@@ -2369,9 +2369,8 @@ h1, h2, h3, h4, h5, h6 {
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(36px);
-  transition: opacity 1000ms var(--md-motion-easing-spring),
-              transform 1000ms var(--md-motion-easing-spring);
-  will-change: opacity, transform;
+  transition: opacity 700ms var(--md-motion-easing-spring),
+              transform 700ms var(--md-motion-easing-spring);
 }
 
 .animate-on-scroll.visible {
@@ -3362,4 +3361,201 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--md-sys-color-primary-container) !important;
   opacity: 0.92;
   transform: scale(1.04);
+}
+
+/* ===================================================
+   Mobile Performance Optimizations
+   Target: touch devices (phones/tablets without pointer hover)
+   =================================================== */
+
+/* 1. Remove background-attachment:fixed on mobile — it disables GPU compositing
+      on iOS Safari and forces full-page repaints on every scroll frame */
+@media (max-width: 768px) {
+  html {
+    background-attachment: scroll;
+  }
+
+  html.dark-theme {
+    background-attachment: scroll !important;
+  }
+}
+
+/* 2. On touch/pointer-coarse devices, replace costly backdrop-filter:blur() on cards
+      with simple opaque backgrounds. backdrop-filter forces a separate compositing
+      layer + full rasterization — expensive on mobile GPUs. */
+@media (hover: none), (pointer: coarse) {
+  /* Hero bento cards */
+  .hero-card-inner {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .dark-theme .hero-card-inner {
+    background: rgba(20, 31, 59, 0.97);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* Service & Testimonial cards */
+  .service-card {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .dark-theme .service-card {
+    background: rgba(20, 31, 59, 0.97);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .testimonial-card {
+    background-color: rgba(255, 255, 255, 0.97);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .dark-theme .testimonial-card {
+    background-color: rgba(20, 31, 59, 0.97);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* Contact info card */
+  .contact-info-card {
+    background-color: rgba(255, 255, 255, 0.97);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .dark-theme .contact-info-card {
+    background-color: rgba(20, 31, 59, 0.97);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* Floating hero cards */
+  .hero-floating-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.96);
+  }
+  .dark-theme .hero-floating-card {
+    background: rgba(15, 24, 46, 0.97);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* Doctor avail badge */
+  .doctor-avail-badge {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.97);
+  }
+
+  /* Section-alt — remove blur */
+  .section-alt {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* 3. Pause ambient blob animations — continuously animating large blur elements
+        destroys battery life and FPS on mobile */
+  .ambient-blob-1,
+  .ambient-blob-2 {
+    animation: none;
+    opacity: 0.06;
+    filter: blur(60px); /* Reduced blur = cheaper */
+  }
+
+  /* body::before / ::after glow orbs — reduce opacity, no GPU compositing needed */
+  body::before,
+  body::after {
+    opacity: 0.5;
+  }
+
+  /* 4. Disable hover-only 3D transforms on touch — they trigger on tap which
+        causes a jarring visual glitch. Pure cosmetic, never seen on touch. */
+  .hero-card-inner:hover,
+  .service-card:hover,
+  .testimonial-card:hover,
+  .contact-info-card:hover,
+  .doctor-profile-card:hover,
+  .contact-map-wrapper:hover,
+  .gallery-marquee-card:hover {
+    transform: none;
+  }
+
+  /* Keep the doctor card hover subtle on touch */
+  .doctor-profile-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  /* 5. Reduce scroll animation duration for snappier feel on mobile */
+  .animate-on-scroll {
+    transition-duration: 400ms;
+  }
+
+  /* 6. Reduce marquee image size slightly for less paint area on mobile */
+  .gallery-marquee-card {
+    width: 240px;
+    height: 185px;
+  }
+
+  /* 7. Disable body::before fixed-position glow orbs on mobile scroll 
+        (fixed-position elements create their own stacking contexts) */
+  body::before {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+  }
+  body::after {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+  }
+}
+
+/* 8. content-visibility: auto — browser skips layout/paint of off-screen sections
+      until they're about to enter the viewport. Massive rendering speedup. */
+@media (max-width: 768px) {
+  #services,
+  #facilities,
+  #doctor,
+  #gallery,
+  #reviews,
+  #faq,
+  #contact {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px; /* Placeholder height prevents layout shifts */
+  }
+}
+
+/* 9. Reduce transition complexity on mobile for smoother 60fps */
+@media (max-width: 480px) {
+  .btn {
+    transition: transform 120ms var(--md-motion-easing-spring),
+                background-color 120ms var(--md-motion-easing-standard);
+  }
+
+  .service-card,
+  .testimonial-card,
+  .faq-card {
+    transition: transform 200ms var(--md-motion-easing-spring),
+                box-shadow 200ms var(--md-motion-easing-spring);
+  }
+
+  /* Remove complex border-radius morphing on mobile — unnecessary paint */
+  .service-card:hover {
+    border-radius: 32px 12px 32px 12px; /* No morph, keep static */
+  }
+  .faq-card:hover,
+  .faq-card.open {
+    border-radius: 32px 12px 32px 12px; /* No morph */
+  }
+  .testimonial-card:hover {
+    border-radius: 28px 28px 8px 28px; /* No morph */
+  }
+
+  /* Reduce floating action button shadow complexity */
+  .booking-fab:hover {
+    box-shadow: 0 8px 20px -4px rgba(29, 78, 216, 0.3);
+  }
 }

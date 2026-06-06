@@ -64,6 +64,8 @@ export default function GallerySection() {
                 src={img.src}
                 alt={img.alt}
                 className="gallery-marquee-img"
+                loading="lazy"
+                decoding="async"
               />
               <div className="gallery-marquee-caption">
                 <h4>{img.alt}</h4>

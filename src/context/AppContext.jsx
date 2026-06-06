@@ -38,16 +38,23 @@ export function AppProvider({ children }) {
       if (el) observer.observe(el);
     });
 
+    // Throttle scroll handler with rAF to prevent setState on every frame
+    let rafId = null;
     const handleScroll = () => {
-      if (window.scrollY < 120) {
-        setActiveSection(prev => prev !== '' ? '' : prev);
-      }
+      if (rafId) return; // Already scheduled, skip
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        if (window.scrollY < 120) {
+          setActiveSection(prev => prev !== '' ? '' : prev);
+        }
+      });
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { useApp } from '../../context/AppContext';
 import Button from '../common/Button';
 import WhatsAppIcon from '../common/WhatsAppIcon';
@@ -14,21 +14,23 @@ export default function Hero() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const heroRef = useRef(null);
+  // Detect touch/mobile — disable 3D tilt on touch devices to save CPU
+  const isTouchDevice = useRef(typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches);
 
   // Mouse coordinate listener for 3D tilt on the image card only
-  const handleMouseMove = (e) => {
-    if (!heroRef.current) return;
+  const handleMouseMove = useCallback((e) => {
+    if (isTouchDevice.current || !heroRef.current) return;
     const rect = heroRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
     setMousePos({ x, y });
     if (!isHovered) setIsHovered(true);
-  };
+  }, [isHovered]);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     setMousePos({ x: 0, y: 0 });
     setIsHovered(false);
-  };
+  }, []);
 
   // 3D rotations from mouse position only
   const rotateX = mousePos.y * -14;
@@ -102,6 +104,9 @@ export default function Hero() {
               src="/clinic_lobby.png"
               alt={`${config.clinic.name} modern lobby`}
               className="hero-image"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
             />
             {/* Glare Reflection Sheet */}
             <div

@@ -12,4 +12,35 @@ export default defineConfig({
       modernPolyfills: true,
     }),
   ],
+  build: {
+    // Use terser for better minification
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,     // Remove console.log in production
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.warn'],
+      },
+    },
+    // Split vendor chunks for better caching
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+        },
+      },
+    },
+    // Increase chunk warning limit slightly (our CSS is intentionally large)
+    chunkSizeWarningLimit: 600,
+    // Enable CSS code splitting
+    cssCodeSplit: true,
+    // Generate source maps only in development
+    sourcemap: false,
+    // Inline small assets to reduce HTTP requests
+    assetsInlineLimit: 4096,
+  },
+  // Optimize deps pre-bundling
+  optimizeDeps: {
+    include: ['react', 'react-dom'],
+  },
 })
