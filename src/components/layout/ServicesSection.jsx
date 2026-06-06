@@ -13,6 +13,9 @@ export default function ServicesSection() {
 
   const headerRef = useScrollAnimation();
 
+  // Filter out nursing services from specialties grid to avoid duplication with facilities
+  const outpatientServices = (config.services || []).filter(srv => srv.id !== 'nursing');
+
   return (
     <Section id="services" alt animate={false}>
       <div className="section-header" ref={headerRef}>
@@ -23,7 +26,7 @@ export default function ServicesSection() {
       </div>
 
       <div className="services-grid">
-        {config.services.map((srv, idx) => {
+        {outpatientServices.map((srv, idx) => {
           // Use scroll animation for each individual card with transition delays
           const cardRef = useScrollAnimation();
           const delayClass = `delay-${((idx % 4) + 1) * 100}`;
@@ -31,9 +34,9 @@ export default function ServicesSection() {
           return (
             <div key={srv.id} ref={cardRef} className={delayClass}>
               <ServiceCard
+                id={srv.id}
                 title={srv.title}
                 description={srv.description}
-                iconPath={srv.iconPath}
                 onBook={() => openSpecialtyDetail(srv.id)}
               />
             </div>

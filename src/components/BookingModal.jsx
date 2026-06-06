@@ -135,8 +135,24 @@ export default function BookingModal() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.phone) return;
+    if (e) e.preventDefault();
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[0-9]{10,15}$/;
+    const cleanedPhone = formData.phone.replace(/[\s\-\(\)\+]/g, '');
+
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      alert("Please enter a valid name (at least 2 characters).");
+      return;
+    }
+    if (!emailRegex.test(formData.email.trim())) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    if (!phoneRegex.test(cleanedPhone)) {
+      alert("Please enter a valid phone number (at least 10 digits).");
+      return;
+    }
     
     try {
       const waUrl = getWhatsAppUrl();
@@ -184,9 +200,7 @@ export default function BookingModal() {
                       <div className="option-subtitle">{srv.duration} • {srv.cost}</div>
                     </div>
                     {selectedService === srv.id && (
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
+                      <span className="material-symbols-outlined" style={{ fontSize: '20px', color: 'inherit', fontWeight: 'bold' }}>check</span>
                     )}
                   </div>
                 ))}
@@ -245,7 +259,7 @@ export default function BookingModal() {
 
           {/* STEP 3: Patient Info */}
           {step === 3 && (
-            <form onSubmit={handleSubmit} className="fade-in">
+            <form id="booking-patient-form" onSubmit={handleSubmit} className="fade-in">
               <h3 style={{ marginBottom: '16px' }}>Patient Registration</h3>
               <p className="body-medium" style={{ marginBottom: '20px' }}>
                 Booking <strong>{currentService.title}</strong> on{' '}
@@ -260,6 +274,9 @@ export default function BookingModal() {
                 <input 
                   type="text" 
                   required
+                  minLength={2}
+                  pattern="^[A-Za-z\s]{2,50}$"
+                  title="Please enter a valid name (2-50 letters/spaces only)"
                   placeholder="e.g. John Doe"
                   className="form-input"
                   value={formData.name}
@@ -284,7 +301,9 @@ export default function BookingModal() {
                 <input 
                   type="tel" 
                   required
-                  placeholder="e.g. (555) 000-0000"
+                  pattern="^\+?[0-9\s\-\(\)]{10,16}$"
+                  title="Please enter a valid phone number (at least 10 digits)"
+                  placeholder="e.g. 9876543210"
                   className="form-input"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -308,7 +327,9 @@ export default function BookingModal() {
           {/* STEP 4: Success Message / Action */}
           {step === 4 && (
             <div className="success-card fade-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '16px' }}>
-              <div className="success-icon" style={{ backgroundColor: 'var(--md-sys-color-primary-container)', color: 'var(--md-sys-color-primary)', width: '64px', height: '64px', fontSize: '1.8rem', animation: 'success-bounce 1s var(--md-motion-easing-spring) infinite alternate' }}>✓</div>
+              <div className="success-icon" style={{ backgroundColor: 'var(--md-sys-color-primary-container)', color: 'var(--md-sys-color-on-primary-container)', width: '64px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'success-bounce 1s var(--md-motion-easing-spring) infinite alternate' }}>
+                <span className="material-symbols-outlined" style={{ fontSize: '32px', fontWeight: 'bold' }}>check</span>
+              </div>
               <h2 style={{ marginTop: '4px' }}>Request Prepared!</h2>
               
               {/* Alert Card: Action Required */}
@@ -326,7 +347,7 @@ export default function BookingModal() {
                 fontSize: '0.82rem',
                 lineHeight: '1.45'
               }}>
-                <span style={{ fontSize: '1.2rem', lineHeight: 1 }}>⚠️</span>
+                <span className="material-symbols-outlined" style={{ fontSize: '20px', color: 'var(--md-sys-color-tertiary)', flexShrink: 0 }}>warning</span>
                 <span><strong>Action Required:</strong> Your booking is <strong>not finalized</strong> yet. You must complete the steps below to send the request via WhatsApp.</span>
               </div>
 
@@ -463,15 +484,7 @@ export default function BookingModal() {
                   fontWeight: '700'
                 }}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-                </svg>
+                <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>call</span>
                 Or Call Clinic Directly
               </a>
 
@@ -523,7 +536,8 @@ export default function BookingModal() {
               <Button variant="tonal" onClick={handleBack}>Back</Button>
               <Button 
                 variant="filled" 
-                onClick={handleSubmit}
+                type="submit"
+                form="booking-patient-form"
                 disabled={!formData.name || !formData.email || !formData.phone}
                 style={{ opacity: (!formData.name || !formData.email || !formData.phone) ? 0.5 : 1 }}
               >

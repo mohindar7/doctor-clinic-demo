@@ -8,9 +8,9 @@
     "logoUrl": "/logo.png"
   },
   "theme": {
-    "primaryHue": 208,
-    "primarySaturation": 95,
-    "primaryLightness": 44
+    "primaryHue": 222,
+    "primarySaturation": 47,
+    "primaryLightness": 11
   },
   "doctor": {
     "name": "Dr. Roshan Rana & Dr. Komal Rana",
@@ -103,6 +103,60 @@
       "author": "Dinesh Parmar",
       "meta": "Local Business Owner",
       "avatar": "DP"
+    },
+    {
+      "rating": 5,
+      "text": "\"The pediatric care here is exceptional. Dr. Komal Rana was very gentle and patient with my daughter during her vaccinations. Clean and family-friendly environment.\"",
+      "author": "Preeti Joshi",
+      "meta": "Mother of 5yo",
+      "avatar": "PJ"
+    },
+    {
+      "rating": 5,
+      "text": "\"I visited Dr. Roshan for chronic hypertension management. He is very thorough, spends time understanding history, and doesn't prescribe unnecessary medicines.\"",
+      "author": "Rajesh Mehta",
+      "meta": "Soma Talav Resident",
+      "avatar": "RM"
+    },
+    {
+      "rating": 5,
+      "text": "\"Highly professional nursing home services. My father was admitted here for post-op recovery. The staff was attentive 24/7, and doctors checked in regularly.\"",
+      "author": "Sanjay Trivedi",
+      "meta": "Son of Inpatient",
+      "avatar": "ST"
+    },
+    {
+      "rating": 5,
+      "text": "\"Very convenient walk-in experience for general checkups. Both doctors are extremely knowledgeable, polite, and explain details clearly. Highly recommended!\"",
+      "author": "Meera Rao",
+      "meta": "Regular Patient",
+      "avatar": "MR"
+    }
+  ],
+  "facilities": [
+    {
+      "id": "inpatient",
+      "title": "24/7 Inpatient Wards",
+      "description": "Clean, comfortable semi-private rooms and general wards with round-the-clock professional nursing support for patient recovery.",
+      "icon": "bed"
+    },
+    {
+      "id": "emergency",
+      "title": "Emergency Stabilizer Care",
+      "description": "Equipped for initial trauma care, surgical dressing, acute illness stabilization, and immediate medical intervention.",
+      "icon": "emergency"
+    },
+    {
+      "id": "vaccination",
+      "title": "Approved Vaccination Center",
+      "description": "Authorized center offering complete childhood immunization schedules, developmental screening, and adult booster shots.",
+      "icon": "vaccines"
+    },
+    {
+      "id": "pharmacy",
+      "title": "Pharmacy & Diagnostics",
+      "description": "Fast laboratory sample collection in partnership with elite diagnostic labs, alongside in-house prescription fulfillment.",
+      "icon": "local_pharmacy"
     }
   ]
 }

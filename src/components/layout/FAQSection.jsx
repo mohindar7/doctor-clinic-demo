@@ -63,9 +63,9 @@ export default function FAQSection() {
               >
                 <div className="faq-question-row">
                   <h3 className="faq-question">{item.question}</h3>
-                  <div className="faq-toggle-icon" aria-hidden="true">
-                    {isOpen ? '−' : '+'}
-                  </div>
+                  <span className="material-symbols-outlined faq-toggle-icon" aria-hidden="true" style={{ fontSize: '18px' }}>
+                    expand_more
+                  </span>
                 </div>
 
                 <div className={`faq-answer-wrapper ${isOpen ? 'open' : ''}`}>

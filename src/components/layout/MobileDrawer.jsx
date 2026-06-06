@@ -1,11 +1,12 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
+import ThemeToggle from '../common/ThemeToggle';
 
 /**
  * Slide-out navigation drawer for mobile and tablet screen widths.
  */
 export default function MobileDrawer() {
-  const { isDrawerOpen, setIsDrawerOpen } = useApp();
+  const { isDrawerOpen, setIsDrawerOpen, activeSection } = useApp();
 
   return (
     <>
@@ -18,7 +19,7 @@ export default function MobileDrawer() {
           <li>
             <a
               href="#services"
-              className="mobile-drawer-link"
+              className={`mobile-drawer-link ${activeSection === 'services' ? 'active' : ''}`}
               onClick={() => setIsDrawerOpen(false)}
             >
               Services
@@ -27,7 +28,7 @@ export default function MobileDrawer() {
           <li>
             <a
               href="#doctor"
-              className="mobile-drawer-link"
+              className={`mobile-drawer-link ${activeSection === 'doctor' ? 'active' : ''}`}
               onClick={() => setIsDrawerOpen(false)}
             >
               About
@@ -36,7 +37,7 @@ export default function MobileDrawer() {
           <li>
             <a
               href="#gallery"
-              className="mobile-drawer-link"
+              className={`mobile-drawer-link ${activeSection === 'gallery' ? 'active' : ''}`}
               onClick={() => setIsDrawerOpen(false)}
             >
               Gallery
@@ -45,7 +46,7 @@ export default function MobileDrawer() {
           <li>
             <a
               href="#testimonials"
-              className="mobile-drawer-link"
+              className={`mobile-drawer-link ${activeSection === 'testimonials' ? 'active' : ''}`}
               onClick={() => setIsDrawerOpen(false)}
             >
               Reviews
@@ -54,13 +55,16 @@ export default function MobileDrawer() {
           <li>
             <a
               href="#contact"
-              className="mobile-drawer-link"
+              className={`mobile-drawer-link ${activeSection === 'contact' ? 'active' : ''}`}
               onClick={() => setIsDrawerOpen(false)}
             >
               Contact
             </a>
           </li>
         </ul>
+        <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'center', width: '100%', paddingTop: '20px' }}>
+          <ThemeToggle />
+        </div>
       </div>
     </>
   );

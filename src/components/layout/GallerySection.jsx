@@ -1,90 +1,109 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Section from '../common/Section';
 import useScrollAnimation from '../../hooks/useScrollAnimation';
 
 const GALLERY_IMAGES = [
-  { src: '/gallery_1.png', alt: 'Clinic Reception' },
+  { src: '/gallery_1.png', alt: 'Clinic Reception Chamber' },
   { src: '/gallery_2.png', alt: 'Patient Ward Cabin' },
   { src: '/gallery_3.png', alt: 'Diagnostic Center' },
-  { src: '/gallery_4.png', alt: 'General Ward & Nurse Desk' }
+  { src: '/gallery_4.png', alt: 'General Ward & Nurse Desk' },
 ];
+
+// Double the array for seamless looping
+const LOOPED_IMAGES = [...GALLERY_IMAGES, ...GALLERY_IMAGES];
 
 /**
  * GallerySection
- * Displays photos of clinic rooms, diagnostic systems, and wards.
+ * Displays clinic photos as an infinite auto-scrolling marquee strip.
+ * Hover on any card to pause the marquee and zoom the photo.
  */
 export default function GallerySection() {
   const headerRef = useScrollAnimation();
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // Close lightbox on Escape key press
+  useEffect(() => {
+    if (!selectedImage) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setSelectedImage(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage]);
 
   return (
     <Section id="gallery" animate={false}>
       <div className="section-header" ref={headerRef}>
-        <h2 className="display-medium">Our Facilities & Clinic</h2>
+        <h2 className="display-medium">Our Facilities &amp; Clinic</h2>
         <p className="body-large">
-          A glimpse inside Shraddha Clinic & Nursing Home, showing our clean chambers, diagnostic systems, and ward rooms.
+          A glimpse inside Shraddha Clinic &amp; Nursing Home — our clean chambers, diagnostic systems, and ward rooms.
         </p>
       </div>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-        gap: '24px',
-        marginTop: '40px'
-      }}>
-        {GALLERY_IMAGES.map((img, idx) => {
-          const itemRef = useScrollAnimation();
-          const delayClass = `delay-${((idx % 4) + 1) * 100}`;
-
-          return (
-            <div key={idx} ref={itemRef} className={delayClass}>
-              <div
-                className="service-card"
-                style={{
-                  padding: 0,
-                  overflow: 'hidden',
-                  height: '280px',
-                  position: 'relative',
-                }}
-              >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    transition: 'transform var(--md-motion-duration-medium) var(--md-motion-easing-spring)',
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.08)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'scale(1)';
-                  }}
-                />
-                <div style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  background: 'linear-gradient(transparent, rgba(15, 23, 42, 0.85))',
-                  padding: '20px',
-                  color: 'white',
-                }}>
-                  <h4 style={{
-                    color: 'white',
-                    fontFamily: 'var(--md-font-display)',
-                    fontSize: '1.05rem',
-                    fontWeight: '700',
-                  }}>
-                    {img.alt}
-                  </h4>
-                </div>
+      {/* Infinite Marquee Strip */}
+      <div className="gallery-marquee-container">
+        <div className="gallery-marquee-track">
+          {LOOPED_IMAGES.map((img, idx) => (
+            <div 
+              key={idx} 
+              className="gallery-marquee-card"
+              onClick={() => setSelectedImage(img)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  setSelectedImage(img);
+                }
+              }}
+            >
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="gallery-marquee-img"
+              />
+              <div className="gallery-marquee-caption">
+                <h4>{img.alt}</h4>
               </div>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
+
+      {/* Fullscreen Lightbox Modal */}
+      {selectedImage && (
+        <div 
+          className="modal-overlay open" 
+          onClick={() => setSelectedImage(null)}
+          style={{ zIndex: 1100 }}
+        >
+          <div 
+            className="gallery-modal-card" 
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="gallery-modal-header">
+              <h3 className="title-large" style={{ margin: 0 }}>{selectedImage.alt}</h3>
+              <button 
+                className="modal-close-btn" 
+                onClick={() => setSelectedImage(null)}
+                aria-label="Close lightbox"
+              >
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
+            <div className="gallery-modal-body">
+              <img 
+                src={selectedImage.src} 
+                alt={selectedImage.alt} 
+                className="gallery-modal-img" 
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </Section>
   );
 }

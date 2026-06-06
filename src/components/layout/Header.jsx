@@ -1,6 +1,5 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import ThemeToggle from '../common/ThemeToggle';
 
 /**
  * Main application navigation header.
@@ -15,7 +14,7 @@ import { getClinicStatus } from '../../utils/clinicTimeUtils';
  * and quick-booking actions.
  */
 export default function Header() {
-  const { config, openBooking, isDrawerOpen, setIsDrawerOpen } = useApp();
+  const { config, openBooking, isDrawerOpen, setIsDrawerOpen, activeSection } = useApp();
   const status = getClinicStatus();
 
   return (
@@ -31,10 +30,10 @@ export default function Header() {
               <img
                 src={config.clinic.logoUrl}
                 alt={`${config.clinic.name} Logo`}
-                style={{ height: '42px', width: 'auto', objectFit: 'contain' }}
+                className="logo-img"
               />
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', justifyContent: 'center' }}>
-                <span style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--md-sys-color-primary)', whiteSpace: 'nowrap', lineHeight: 1.15 }}>
+                <span className="clinic-name" style={{ fontSize: '1.2rem', fontWeight: 800, whiteSpace: 'nowrap', lineHeight: 1.15 }}>
                   {config.clinic.name}
                 </span>
                 
@@ -62,9 +61,9 @@ export default function Header() {
             </>
           ) : (
             <>
-              <span className="logo-icon">{config.clinic.name[0]}</span>
+              <span className="material-symbols-outlined logo-icon" style={{ fontSize: '24px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px' }}>medical_services</span>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                <span style={{ fontSize: '1.2rem', fontWeight: 800, lineHeight: 1.15 }}>
+                <span className="clinic-name" style={{ fontSize: '1.2rem', fontWeight: 800, lineHeight: 1.15 }}>
                   {config.clinic.name}
                 </span>
                 
@@ -94,16 +93,14 @@ export default function Header() {
         </a>
 
         <ul className="nav-links">
-          <li><a href="#services" className="nav-link">Services</a></li>
-          <li><a href="#doctor" className="nav-link">About The Doctor</a></li>
-          <li><a href="#gallery" className="nav-link">Gallery</a></li>
-          <li><a href="#testimonials" className="nav-link">Reviews</a></li>
-          <li><a href="#contact" className="nav-link">Contact</a></li>
+          <li><a href="#services" className={`nav-link ${activeSection === 'services' ? 'active' : ''}`}>Services</a></li>
+          <li><a href="#doctor" className={`nav-link ${activeSection === 'doctor' ? 'active' : ''}`}>About The Doctor</a></li>
+          <li><a href="#gallery" className={`nav-link ${activeSection === 'gallery' ? 'active' : ''}`}>Gallery</a></li>
+          <li><a href="#testimonials" className={`nav-link ${activeSection === 'testimonials' ? 'active' : ''}`}>Reviews</a></li>
+          <li><a href="#contact" className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`}>Contact</a></li>
         </ul>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <ThemeToggle />
-
           <button
             className={`hamburger-btn ${isDrawerOpen ? 'open' : ''}`}
             onClick={() => setIsDrawerOpen(!isDrawerOpen)}

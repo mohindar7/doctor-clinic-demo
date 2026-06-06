@@ -21,12 +21,13 @@ export default function Footer() {
               <img
                 src={config.clinic.logoUrl}
                 alt={`${config.clinic.name} Logo`}
-                style={{ height: '40px', borderRadius: '8px', objectFit: 'contain' }}
+                className="logo-img"
+                style={{ height: '40px' }}
               />
             ) : (
               <span className="logo-icon">{config.clinic.name[0]}</span>
             )}
-            {config.clinic.name}
+            <span className="clinic-name">{config.clinic.name}</span>
           </a>
           <ul className="footer-nav">
             <li><a href="#services">Services</a></li>
@@ -42,7 +43,9 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} {config.clinic.name} Clinic. All
             rights reserved.
           </p>
-          <p>designed by Mohindar</p>
+          <p className="designer-credit">
+            Designed with <span className="heart-icon">♥</span> by <a href="#" className="designer-link">Mohindar</a>
+          </p>
         </div>
       </div>
     </footer>

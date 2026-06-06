@@ -12,8 +12,7 @@ export default function ContactSection() {
   const { config } = useApp();
 
   const headerRef = useScrollAnimation();
-  const detailsRef = useScrollAnimation();
-  const mapRef = useScrollAnimation();
+  const contentRef = useScrollAnimation();
 
   return (
     <Section id="contact" animate={false}>
@@ -22,58 +21,59 @@ export default function ContactSection() {
         <p className="body-large">{config.contact.description}</p>
       </div>
 
-      <div className="contact-layout">
-        <div className="contact-details" ref={detailsRef}>
-          <div className="contact-item">
-            <div className="contact-item-icon">📍</div>
-            <div className="contact-item-content">
-              <h3>Clinic Location</h3>
-              <p className="body-medium">{config.contact.location}</p>
+      <div className="contact-layout" ref={contentRef}>
+        <div className="contact-info-card">
+          <div className="contact-details">
+            <div className="contact-item">
+              <div className="contact-item-icon">
+                <span className="material-symbols-outlined">location_on</span>
+              </div>
+              <div className="contact-item-content">
+                <h3>Clinic Location</h3>
+                <p className="body-medium">{config.contact.location}</p>
+              </div>
             </div>
-          </div>
 
-          <div className="contact-item">
-            <div className="contact-item-icon">📞</div>
-            <div className="contact-item-content">
-              <h3>Phone & Email</h3>
-              <p className="body-medium">
-                {config.contact.phone}<br />
-                {config.contact.email}
-              </p>
+            <div className="contact-item">
+              <div className="contact-item-icon">
+                <span className="material-symbols-outlined">call</span>
+              </div>
+              <div className="contact-item-content">
+                <h3>Phone & Email</h3>
+                <p className="body-medium">
+                  {config.contact.phone}<br />
+                  {config.contact.email}
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div className="contact-item">
-            <div className="contact-item-icon">🕒</div>
-            <div className="contact-item-content">
-              <h3>Operating Hours</h3>
-              <p className="body-medium" style={{ whiteSpace: 'pre-line' }}>
-                {config.contact.hours}
-              </p>
+            <div className="contact-item">
+              <div className="contact-item-icon">
+                <span className="material-symbols-outlined">schedule</span>
+              </div>
+              <div className="contact-item-content">
+                <h3>Operating Hours</h3>
+                <p className="body-medium" style={{ whiteSpace: 'pre-line' }}>
+                  {config.contact.hours}
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        <div
-          ref={mapRef}
-          style={{ height: '380px', overflow: 'hidden', transitionDelay: '200ms' }}
-        >
-          <div className="contact-map-wrapper" style={{ height: '100%' }}>
-            <iframe
-              title="Google Maps Location"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              loading="lazy"
-              allowFullScreen
-              src={
-                config.contact.mapUrl ||
-                `https://maps.google.com/maps?q=${encodeURIComponent(
-                  config.contact.location
-                )}&t=&z=16&ie=UTF8&iwloc=near&output=embed`
-              }
-            ></iframe>
-          </div>
+        <div className="contact-map-wrapper">
+          <iframe
+            title="Google Maps Location"
+            className="contact-map-iframe"
+            src={
+              config.contact.mapUrl ||
+              `https://maps.google.com/maps?q=${encodeURIComponent(
+                config.contact.location
+              )}&t=&z=16&ie=UTF8&iwloc=near&output=embed`
+            }
+            loading="lazy"
+            allowFullScreen
+          ></iframe>
         </div>
       </div>
     </Section>
