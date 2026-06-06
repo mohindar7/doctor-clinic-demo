@@ -4,7 +4,7 @@
     "fullName": "Shraddha Clinic & Nursing Home - Dr. Roshan & Dr. Komal Rana",
     "badge": "Welcome to Shraddha Clinic & Nursing Home",
     "heroTitle": "Your Family's Health is Our Highest Priority",
-    "heroSubtitle": "Experience professional, personalized primary care in Vadodara. Led by the highly-rated physician team of Dr. Roshan Rana and Dr. Komal Rana, we offer expert general medicine, pediatric care, and complete nursing home services.",
+    "heroSubtitle": "Experience professional, personalized primary care in Vadodara. Led by Dr. Roshan Rana (Family Physician, MBBS – SSG Hospital) and Dr. Komal Rana (Consultant Physician & Diabetologist, MD Medicine), we offer expert general medicine, diabetes care, ECG, Day Care, Lab services, and complete nursing home services.",
     "logoUrl": "/logo.png"
   },
   "theme": {
@@ -12,17 +12,60 @@
     "primarySaturation": 47,
     "primaryLightness": 11
   },
-  "doctor": {
-    "name": "Dr. Roshan Rana & Dr. Komal Rana",
-    "roleBadge": "Expert Family Physicians & Surgeons",
-    "bioLarge": "Dr. Roshan Rana and Dr. Komal Rana are board-certified general practitioners at Shraddha Clinic & Nursing Home. They are widely praised across Vadodara for their professionalism, clinical expertise, and deep, thorough understanding of each patient's medical history.",
-    "bioMedium": "Based in the Soma Talav area, their practice covers outpatient consultation, pediatric monitoring, vaccination programs, and general surgery, delivering supportive care that patients trust.",
-    "stats": [
-      { "val": "14+", "lbl": "Years Experience" },
-      { "val": "4.9★", "lbl": "230+ Google Reviews" },
-      { "val": "98%", "lbl": "Satisfaction Rate" }
-    ]
-  },
+  "doctors": [
+    {
+      "id": "roshan",
+      "name": "Dr. Roshan Rana",
+      "role": "Physician & Family Physician | MBBS (SSG Hospital)",
+      "portrait": "/roshan_rana.png",
+      "photoPosition": "center 35%",
+      "bio": "Dr. Roshan Rana is a dedicated Family Physician with 10+ years of extensive medical experience at SSG Hospital, Vadodara. He treats all types of diseases — BP, Diabetes, Heart Attack, Brain Hemorrhage, Asthma, TB, Kidney, Liver, Thyroid, Dengue, Malaria, Jaundice, and more. He also treated 3,100+ COVID-19 patients with timely and positive outcomes. Offering ECG, Day Care, Lab services, full-body checkups, and home visits for seniors and the differently-abled.",
+      "qualifications": ["MBBS – SSG Hospital, Vadodara"],
+      "specialties": ["BP & Diabetes Management", "Heart Attack & Brain Care", "Respiratory & Asthma", "Kidney, Liver & Thyroid"],
+      "clinicServices": [
+        "ECG & Day Care",
+        "Laboratory Tests",
+        "Admission (Dakhla) Facility",
+        "Full Body Check-Up",
+        "Senior Citizen – Affordable Care",
+        "Home Visits – Senior & Disabled"
+      ],
+      "availability": "Mon – Sat: 9 AM – 9 PM · Sun: 9 AM – 12 PM",
+      "languages": ["Gujarati", "Hindi", "English"],
+      "stats": [
+        { "val": "10+", "lbl": "Years Experience" },
+        { "val": "3100+", "lbl": "COVID Patients Treated" },
+        { "val": "5.0★", "lbl": "Google Rating" }
+      ]
+    },
+    {
+      "id": "komal",
+      "name": "Dr. Komal Rana",
+      "role": "Consultant Physician & Diabetologist",
+      "portrait": "/komal_rana.png",
+      "photoPosition": "center 15%",
+      "bio": "Dr. Komal Rana is an MD-qualified Consultant Physician and Diabetologist with over 10 years of rich multi-hospital clinical experience — spanning SSG Hospital, K.J. Somaiya Hospital (Mumbai), Baroda Heart Hospital, ONGC Hospital (Ankleshwar), Railway Hospital (Vadodara Division), and more. Known for her thorough approach and patient-centred care, she offers expert management of diabetes, hypertension, and complex internal medicine cases.",
+      "qualifications": ["MBBS", "MD – General Medicine", "CIH – SSG Hospital"],
+      "specialties": ["Physician & Diabetology", "Hypertension Management", "Internal Medicine", "Family & Preventive Care"],
+      "hospitalExperience": [
+        "S.S.G. Hospital, Vadodara",
+        "K.J. Somaiya Hospital, Mumbai",
+        "Baroda Heart Hospital, Vadodara",
+        "ONGC Hospital, Ankleshwar",
+        "Railway Hospital, Vadodara Division",
+        "HMP Hospital – Dediyapada (Reliance)",
+        "C.A. Patel Hospital, Vadodara",
+        "Amit Hospital, Valsad"
+      ],
+      "availability": "Mon – Sat: 9 AM – 9 PM · Sun: 9 AM – 12 PM",
+      "languages": ["Gujarati", "Hindi", "English"],
+      "stats": [
+        { "val": "10+", "lbl": "Years Experience" },
+        { "val": "4.9★", "lbl": "Google Rating" },
+        { "val": "8+", "lbl": "Hospitals Served" }
+      ]
+    }
+  ],
   "contact": {
     "badge": "Visit Our Practice",
     "description": "Conveniently located near Kapurai. Walk-ins welcome for consultations, bookings recommended for nursing services.",
