@@ -101,7 +101,7 @@ export default function Hero() {
             }}
           >
             <img
-              src="/clinic_lobby.png"
+              src="/clinic_lobby.webp"
               alt={`${config.clinic.name} modern lobby`}
               className="hero-image"
               loading="eager"

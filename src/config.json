@@ -5,7 +5,7 @@
     "badge": "Welcome to Shraddha Clinic & Nursing Home",
     "heroTitle": "Your Family's Health is Our Highest Priority",
     "heroSubtitle": "Experience professional, personalized primary care in Vadodara. Led by Dr. Roshan Rana (Family Physician, MBBS – SSG Hospital) and Dr. Komal Rana (Consultant Physician & Diabetologist, MD Medicine), we offer expert general medicine, diabetes care, ECG, Day Care, Lab services, and complete nursing home services.",
-    "logoUrl": "/logo.png"
+    "logoUrl": "/logo.webp"
   },
   "theme": {
     "primaryHue": 222,
@@ -17,7 +17,7 @@
       "id": "roshan",
       "name": "Dr. Roshan Rana",
       "role": "Physician & Family Physician | MBBS (SSG Hospital)",
-      "portrait": "/roshan_rana.png",
+      "portrait": "/roshan_rana.webp",
       "photoPosition": "center 35%",
       "bio": "Dr. Roshan Rana is a dedicated Family Physician with 10+ years of extensive medical experience at SSG Hospital, Vadodara. He treats all types of diseases — BP, Diabetes, Heart Attack, Brain Hemorrhage, Asthma, TB, Kidney, Liver, Thyroid, Dengue, Malaria, Jaundice, and more. He also treated 3,100+ COVID-19 patients with timely and positive outcomes. Offering ECG, Day Care, Lab services, full-body checkups, and home visits for seniors and the differently-abled.",
       "qualifications": ["MBBS – SSG Hospital, Vadodara"],
@@ -42,7 +42,7 @@
       "id": "komal",
       "name": "Dr. Komal Rana",
       "role": "Consultant Physician & Diabetologist",
-      "portrait": "/komal_rana.png",
+      "portrait": "/komal_rana.webp",
       "photoPosition": "center 15%",
       "bio": "Dr. Komal Rana is an MD-qualified Consultant Physician and Diabetologist with over 10 years of rich multi-hospital clinical experience — spanning SSG Hospital, K.J. Somaiya Hospital (Mumbai), Baroda Heart Hospital, ONGC Hospital (Ankleshwar), Railway Hospital (Vadodara Division), and more. Known for her thorough approach and patient-centred care, she offers expert management of diabetes, hypertension, and complex internal medicine cases.",
       "qualifications": ["MBBS", "MD – General Medicine", "CIH – SSG Hospital"],

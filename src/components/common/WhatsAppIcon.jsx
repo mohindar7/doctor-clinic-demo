@@ -1,5 +1,5 @@
 import React from 'react';
-import whatsappLogo from '../../assets/whatsapp.png';
+import whatsappLogo from '../../assets/whatsapp.webp';
 
 /**
  * Reusable WhatsApp PNG Icon component.

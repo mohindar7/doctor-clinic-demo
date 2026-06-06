@@ -3,10 +3,10 @@ import Section from '../common/Section';
 import useScrollAnimation from '../../hooks/useScrollAnimation';
 
 const GALLERY_IMAGES = [
-  { src: '/gallery_1.png', alt: 'Clinic Reception Chamber' },
-  { src: '/gallery_2.png', alt: 'Patient Ward Cabin' },
-  { src: '/gallery_3.png', alt: 'Diagnostic Center' },
-  { src: '/gallery_4.png', alt: 'General Ward & Nurse Desk' },
+  { src: '/gallery_1.webp', alt: 'Clinic Reception Chamber' },
+  { src: '/gallery_2.webp', alt: 'Patient Ward Cabin' },
+  { src: '/gallery_3.webp', alt: 'Diagnostic Center' },
+  { src: '/gallery_4.webp', alt: 'General Ward & Nurse Desk' },
 ];
 
 // Double the array for seamless looping
